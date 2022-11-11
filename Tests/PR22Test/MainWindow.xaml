@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Button Content="Button" HorizontalAlignment="Left" Margin="152,190,0,0" VerticalAlignment="Top"/>
+        <StackPanel HorizontalAlignment="Left" Height="189" Margin="400,0,0,0" VerticalAlignment="Center" Width="300">
+            <RadioButton Content="RadioButton"/>
+        </StackPanel>
+       
+        <ProgressBar HorizontalAlignment="Left" Height="59" Margin="152,30,0,0" VerticalAlignment="Top" Width="479" Value="50"/>
+        <Slider HorizontalAlignment="Left" Height="38" Margin="128,341,0,0" VerticalAlignment="Top" Width="409"/>
     </Grid>
 </Window>
