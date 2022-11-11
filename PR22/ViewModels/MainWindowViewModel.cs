@@ -10,7 +10,7 @@ namespace PR22.ViewModels
      internal class MainWindowViewModel : ViewModel
     {
         #region Заголовок Окна
-        private string _Title ="Анаоиз статистики CV19";
+        private string _Title ="Анализ статистики CV19";
         /// <summary> /// Заголовок окна</summary>
         public string Title
         {
