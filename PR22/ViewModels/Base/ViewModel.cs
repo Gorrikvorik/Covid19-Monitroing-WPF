@@ -5,13 +5,13 @@ using System.Runtime.CompilerServices;
 
 namespace PR22.ViewModels.Base
 {
-    internal abstract class ViewModel : INotifyPropertyChanged,IDisposable
+    internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-    
 
-        protected virtual void OnPropertyChanged([CallerMemberName]string? PropertyName = null)
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? PropertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
@@ -38,5 +38,6 @@ namespace PR22.ViewModels.Base
             _Disposed = true;
             //Освобождение управляемых ресурсов
         }
+ 
     }
 }
