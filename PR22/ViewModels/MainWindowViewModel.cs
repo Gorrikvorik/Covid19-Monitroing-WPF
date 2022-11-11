@@ -1,9 +1,12 @@
-﻿using PR22.ViewModels.Base;
+﻿using PR22.Infrastructure.Commands;
+using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace PR22.ViewModels
 {
@@ -38,6 +41,27 @@ namespace PR22.ViewModels
         }
         #endregion
 
-        
+        #region Команды
+
+
+        #region CloseApplicationCommand
+        public ICommand CloseApplicationCommand { get; }
+
+        private void onCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+        private bool CanCloseApplicationCommandExecute(object p) => true;
+
+        #endregion
+
+
+        #endregion
+        public MainWindowViewModel()
+        {
+            #region Команды
+            CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            #endregion
+        }
     }
 }
