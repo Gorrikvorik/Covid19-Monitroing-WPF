@@ -15,6 +15,19 @@ namespace PR22.ViewModels
 {
      internal class MainWindowViewModel : ViewModel
     {
+        #region SelectedPageIndex : Int - номер вкладки 
+        /// <summary>
+        /// номер вкладки
+        /// </summary>
+        private int _SelectedPageIndex;
+        public int SelectedPageIndex
+        {
+            get => _SelectedPageIndex;
+            set => Set(ref _SelectedPageIndex, value);
+        }
+        #endregion
+
+
         #region TestDataPoints : IEnumerable - DESCRIPTION 
         /// <summary>
         /// Тестовый набор данных для визуализации
@@ -69,13 +82,25 @@ namespace PR22.ViewModels
 
         #endregion
 
+        #region ChangeTabIndexCommand
+
+        public ICommand ChangeTabIndexCommand { get; }
+        private bool CanChangeTabIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
+
+        private void OnChangeTabIndexCommandExecute(object p)
+        {
+            if (p is null) return;
+            SelectedPageIndex += Convert.ToInt32(p);
+        }
+        #endregion
 
         #endregion
         public MainWindowViewModel()
         {
+
             #region Команды
             CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
-
+            ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute,CanChangeTabIndexCommandExecute);
             #endregion
 
             var tmp = new PlotModel { Title = "Статистика" };

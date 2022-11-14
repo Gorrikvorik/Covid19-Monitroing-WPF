@@ -35,17 +35,39 @@
             <MenuItem Header="Помощь">
                 <MenuItem Header="О Программе"></MenuItem>
             </MenuItem>
+            <MenuItem  Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"></fa:ImageAwesome>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem  Command="{Binding ChangeTabIndexCommand}" CommandParameter="+1">
+                <MenuItem.Header>
+                    <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleRight"></fa:ImageAwesome>
+                </MenuItem.Header>
+            </MenuItem>
+            
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem MaxWidth="300" MinWidth="1">
                 <TextBlock Text="{Binding Status}"/>
+                
+            </StatusBarItem>
+            <StatusBarItem Content="{Binding SelectedPageIndex}">
+
             </StatusBarItem>
             <StatusBarItem>
                 <ProgressBar Width="120" Height="14" Value="30"/> 
             </StatusBarItem>
+           
         </StatusBar>
-        <TabControl SelectedIndex="">
-            <TabItem Visibility="Collapsed">
+        <TabControl SelectedIndex="{Binding SelectedPageIndex}"  >
+            <TabItem Header="График"  >
+                <oxy:PlotView Model="{Binding Model}"  >
+
+
+                </oxy:PlotView>
+            </TabItem>
+            <TabItem >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
 
@@ -87,13 +109,9 @@
                                   />
                 </Grid>
             </TabItem>
-            <TabItem Header="График"  >
-                <oxy:PlotView Model="{Binding Model}"
-                              >
-                    
-                     
-                </oxy:PlotView>
-            </TabItem>
+           
+            <TabItem Header="Вкладка 2"></TabItem>
+            <TabItem Header="Вкладка 3"></TabItem>
         </TabControl>
     </DockPanel>
 
