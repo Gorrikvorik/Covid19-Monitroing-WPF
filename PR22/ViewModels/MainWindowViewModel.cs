@@ -1,4 +1,5 @@
 ﻿using PR22.Infrastructure.Commands;
+using PR22.Models;
 using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,17 @@ namespace PR22.ViewModels
 {
      internal class MainWindowViewModel : ViewModel
     {
+        #region TestDataPoints : IEnumerable - DESCRIPTION 
+        /// <summary>
+        /// Тестовый набор данных для визуализации
+        /// </summary>
+        private IEnumerable<DataPoint> _TestDataPoints;
+        public IEnumerable<DataPoint>TestDataPoints 
+        { get => _TestDataPoints;
+          set => Set(ref _TestDataPoints, value);
+        }
+        #endregion
+
         #region Заголовок Окна
         private string _Title ="Анализ статистики CV19";
         /// <summary> /// Заголовок окна</summary>
@@ -61,7 +73,18 @@ namespace PR22.ViewModels
         {
             #region Команды
             CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+
             #endregion
+            var data_points = new List<DataPoint>((int)(360 / 0.1));
+            for( var x=0d; x< 360; x += 0.1)
+            {
+                const double to_rad = Math.PI / 180;
+                var y = Math.Sin( x * to_rad);
+                data_points.Add(new DataPoint { XValue = x, YValue =y });
+            }
+
+            TestDataPoints = data_points;
+
         }
     }
 }
