@@ -1,2 +1,12 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+using System.Net;
+using System.Net.Http;
+
+const string data_url = @"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
+
+
+var client = new HttpClient();
+var response = client.GetAsync(data_url).Result;
+var csv_str_string = response.Content.ReadAsStringAsync().Result;
+
+Console.ReadLine();
