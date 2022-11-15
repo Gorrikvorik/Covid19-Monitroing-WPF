@@ -2,9 +2,11 @@
 using OxyPlot.Series;
 using PR22.Infrastructure.Commands;
 using PR22.Models;
+using PR22.Models.Decanat;
 using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,14 @@ namespace PR22.ViewModels
 {
      internal class MainWindowViewModel : ViewModel
     {
+
+
+        /* ------------------------------------------------------------------------------------*/
+
+        public ObservableCollection<Group> Groups { get; }
+
+
+
         #region SelectedPageIndex : Int - номер вкладки 
         /// <summary>
         /// номер вкладки
@@ -68,6 +78,10 @@ namespace PR22.ViewModels
         }
         #endregion
 
+
+        /* ------------------------------------------------------------------------------------*/
+
+
         #region Команды
 
 
@@ -95,6 +109,9 @@ namespace PR22.ViewModels
         #endregion
 
         #endregion
+
+
+        /* ------------------------------------------------------------------------------------*/
         public MainWindowViewModel()
         {
 
@@ -123,6 +140,27 @@ namespace PR22.ViewModels
             tmp.Series.Add(series1);
             
             Model = tmp;
+
+            var student_index = 1;
+
+            var students = Enumerable.Range(1, 10).Select(i => new Student
+            {
+                Name = $"Name {student_index++}",
+                Surname = $"Surname {student_index++}",
+                Patronymic = $"Patronymic {student_index++}",
+                Birthday = DateTime.Now,
+                Rating =0
+            });
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+                {
+                Name = $"Группа {i}",
+                Students = new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
+
+
 
         }
         public PlotModel Model { get; private set; }
