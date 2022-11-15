@@ -135,16 +135,57 @@ namespace PR22.ViewModels
         }
         #endregion
 
+        #region CreateNewGroupCommand
+
+        public ICommand CreateNewGroupCommand { get; }
+
+        private bool CanCreateNewGroupCommandExexuted(object p) => true;
+
+        private void OnCreateNewGroupCommandExexuted(object p)
+        {
+            var group_max_index = Groups.Count + 1;
+            var new_group = new Group
+            {
+                Name = $"Группа {group_max_index}",
+                Students = new ObservableCollection<Student>()
+            };
+
+            Groups.Add(new_group);
+        } 
+        #endregion
+ 
+        #region DeleteCommandGroup
+        public ICommand DeleteGroupCommand { get; }
+        private bool CanDeleteGroupCommandExecuted(object p) => p is Group group && Groups.Contains(group); 
+        /// <summary>
+        /// Проверели p - объект типа група ?? содержит группа объект 
+        /// </summary>
+        /// <param name="p"></param>
+
+        private void OnDeleteGroupCommandExecuted(object p)
+        {
+            if (!(p is Group group)) return;
+            var group_index = Groups.IndexOf(group);
+
+            Groups.Remove((group));
+            if(group_index < Groups.Count)
+            {
+                SelectedGroup = Groups[group_index];
+            }
+        }
         #endregion
 
-
+        #endregion
+  
         /* ------------------------------------------------------------------------------------*/
         public MainWindowViewModel()
         {
 
-            #region Команды
+            #region  Объекты Команд
             CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute,CanChangeTabIndexCommandExecute);
+            CreateNewGroupCommand = new LambdaCommand(OnCreateNewGroupCommandExexuted, CanCreateNewGroupCommandExexuted);
+            DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecuted);
             #endregion
 
             var tmp = new PlotModel { Title = "Статистика" };
