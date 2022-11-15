@@ -61,7 +61,7 @@
            
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}"  >
-            <TabItem Header="Студенты" Grid.Column="0">
+            <TabItem Header="Студенты">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--<ColumnDefinition Width="3*"></ColumnDefinition>
@@ -69,10 +69,15 @@
                         <ColumnDefinition Width="250"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="Группы">
-                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"/>
+                    <GroupBox  Grid.Column="0" Header="Группы" >
+                        <ListBox ItemsSource="{Binding Groups}"
+                                 DisplayMemberPath="Name"
+                                 SelectedItem="{Binding SelectedGroup}"/>
                     </GroupBox>
-                    <GroupBox Grid.Column="1" Header="Студенты">
+                    <GroupBox Grid.Column="1" Header="{Binding SelectedGroup.Name, 
+                        
+                        FallbackValue='Студенты',
+                        TargetNullValue='Группа не выбрана'}">
                         <DataGrid >
                             
                         </DataGrid>
