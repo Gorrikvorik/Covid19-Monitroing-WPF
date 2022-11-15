@@ -23,6 +23,22 @@ namespace PR22.ViewModels
 
         public ObservableCollection<Group> Groups { get; }
 
+
+        public object[] CompositeCollection { get; }
+
+
+        #region SelectedCompositeValue: object - выбран непонятный компонент
+        /// <summary>
+        /// номер вкладки
+        /// </summary>
+        private object _SelectedCompositeValue;
+        public object SelectedCompositeValue
+        {
+            get => _SelectedCompositeValue;
+            set => Set(ref _SelectedCompositeValue, value);
+        }
+        #endregion
+
         #region SelectedGroup : Group - Выбранная группа
         /// <summary>Выбранная группа</summary>
 
@@ -171,6 +187,16 @@ namespace PR22.ViewModels
 
             Groups = new ObservableCollection<Group>(groups);
 
+
+            var dat_list = new List<object>();
+
+            dat_list.Add("Hello World");
+            dat_list.Add(42);
+            var groupp = Groups[1];
+            dat_list.Add(groupp);
+            dat_list.Add(groupp.Students[0]);
+
+            CompositeCollection = dat_list.ToArray();
 
 
         }
