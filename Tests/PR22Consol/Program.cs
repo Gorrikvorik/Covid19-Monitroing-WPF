@@ -58,7 +58,8 @@ class Program {
     {
         var russia_data = GetData()
             .First(v => v.Country.Equals("Russia",StringComparison.OrdinalIgnoreCase));
-        Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.Counts,(data,count) =>$"{data:dd:MM} - {count}")));
+        Console.WriteLine(string.Join("\r\n", GetDates().Zip(russia_data.Counts, (data, count) => $"{data:dd:MM:yyyy} - {count}")));
+
         Console.ReadLine();
     }
 

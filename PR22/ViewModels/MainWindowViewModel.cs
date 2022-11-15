@@ -104,18 +104,19 @@ namespace PR22.ViewModels
             #endregion
 
             var tmp = new PlotModel { Title = "Статистика" };
-            var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Square};
+            var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Square };
             var data_points = new List<Models.DataPoint>((int)(360 / 0.1));
             for( var x=0d; x< 360; x += 0.1)
             {
                 const double to_rad = Math.PI / 180;
                 var y = Math.Sin( x * to_rad);
-              //  data_points.Add(new Models.DataPoint { XValue = x, YValue =y });
+                data_points.Add(new Models.DataPoint { XValue = x, YValue =y });
+                
                 series1.Points.Add(new OxyPlot.DataPoint(x,y));
                
             }
             
-           // TestDataPoints = data_points;
+            TestDataPoints = data_points;
             //series1.ItemsSource = data_points;
             
  
