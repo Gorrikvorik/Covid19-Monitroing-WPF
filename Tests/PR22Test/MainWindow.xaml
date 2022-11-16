@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:PR22Test"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
 
+    </Window.Resources>
+    <Grid>
+        <Button   Width="200" Height="50" Content="Обычная кнопка" FontSize="20" Background="White" Padding="0,0,0,20" FontStyle="Oblique"></Button>
     </Grid>
 </Window>
