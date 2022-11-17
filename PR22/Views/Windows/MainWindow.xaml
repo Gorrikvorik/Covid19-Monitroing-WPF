@@ -39,7 +39,7 @@
             <MenuItem Header="Помощь">
                 <MenuItem Header="О Программе"></MenuItem>
             </MenuItem>
-            <MenuItem  Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
+            <!--<MenuItem  Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
                 <MenuItem.Header>
                     <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"></fa:ImageAwesome>
                 </MenuItem.Header>
@@ -48,7 +48,7 @@
                 <MenuItem.Header>
                     <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleRight"></fa:ImageAwesome>
                 </MenuItem.Header>
-            </MenuItem>
+            </MenuItem>-->
 
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
@@ -65,7 +65,7 @@
 
         </StatusBar>
         <TabControl SelectedIndex="{Binding SelectedPageIndex}"  >
-            <TabItem Header="Разнородые данные" Height="20" VerticalAlignment="Top">
+            <!--<TabItem Header="Разнородые данные" Height="20" VerticalAlignment="Top">
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="250"/>
@@ -107,7 +107,7 @@
 
                     </GroupBox>
                 </Grid>
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="Студенты">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -197,14 +197,14 @@
 
             </TabItem>
 
-            <TabItem Header="График"  >
+            <TabItem Header="График"  Visibility="Collapsed" >
                 <oxy:PlotView Model="{Binding Model}"  >
 
 
                 </oxy:PlotView>
             </TabItem>
 
-            <TabItem Header="Вкладка 2">
+            <!--<TabItem Header="Вкладка 2">
                 <Button Margin="20,40" VerticalAlignment="Top" HorizontalAlignment="Left"  Padding="14,5" Opacity="1"
                         Style="{StaticResource CustomButtonStyle}"
                         Width="110" Height="29"  Content="123" 
@@ -257,7 +257,7 @@
                     </Button.Triggers>
                 </Button>
             </TabItem>
-            <TabItem Header="Вкладка 3"></TabItem>
+            <TabItem Header="Вкладка 3"></TabItem>-->
         </TabControl>
     </DockPanel>
 
