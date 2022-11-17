@@ -106,6 +106,13 @@ namespace PR22.ViewModels
         #endregion
 
 
+        public IEnumerable<Student> TestStudents => Enumerable.Range(1, App.IsDesignModel ? 10: 10000000)
+            .Select(i => new Student
+            {
+                Name = $"Имя {i}",
+                Surname = $"Фамилия {i}"
+            });
+
         /* ------------------------------------------------------------------------------------*/
 
 
