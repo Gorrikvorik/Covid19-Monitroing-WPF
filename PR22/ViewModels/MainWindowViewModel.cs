@@ -2,9 +2,11 @@
 using OxyPlot.Series;
 using PR22.Infrastructure.Commands;
 using PR22.Models;
+using PR22.Models.Decanat;
 using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,41 @@ namespace PR22.ViewModels
 {
      internal class MainWindowViewModel : ViewModel
     {
+
+
+        /* ------------------------------------------------------------------------------------*/
+
+        public ObservableCollection<Group> Groups { get; }
+
+
+        public object[] CompositeCollection { get; }
+
+
+        #region SelectedCompositeValue: object - выбран непонятный компонент
+        /// <summary>
+        /// номер вкладки
+        /// </summary>
+        private object _SelectedCompositeValue;
+        public object SelectedCompositeValue
+        {
+            get => _SelectedCompositeValue;
+            set => Set(ref _SelectedCompositeValue, value);
+        }
+        #endregion
+
+        #region SelectedGroup : Group - Выбранная группа
+        /// <summary>Выбранная группа</summary>
+
+        private Group _SelectedGroup  ;
+        /// <summary>Выбранная группа</summary>
+        public Group SelectedGroup
+        {
+            get => _SelectedGroup;
+            set => Set(ref _SelectedGroup, value);
+        }
+        #endregion
+
+
         #region SelectedPageIndex : Int - номер вкладки 
         /// <summary>
         /// номер вкладки
@@ -68,6 +105,10 @@ namespace PR22.ViewModels
         }
         #endregion
 
+
+        /* ------------------------------------------------------------------------------------*/
+
+
         #region Команды
 
 
@@ -94,13 +135,57 @@ namespace PR22.ViewModels
         }
         #endregion
 
+        #region CreateNewGroupCommand
+
+        public ICommand CreateNewGroupCommand { get; }
+
+        private bool CanCreateNewGroupCommandExexuted(object p) => true;
+
+        private void OnCreateNewGroupCommandExexuted(object p)
+        {
+            var group_max_index = Groups.Count + 1;
+            var new_group = new Group
+            {
+                Name = $"Группа {group_max_index}",
+                Students = new ObservableCollection<Student>()
+            };
+
+            Groups.Add(new_group);
+        } 
         #endregion
+ 
+        #region DeleteCommandGroup
+        public ICommand DeleteGroupCommand { get; }
+        private bool CanDeleteGroupCommandExecuted(object p) => p is Group group && Groups.Contains(group); 
+        /// <summary>
+        /// Проверели p - объект типа група ?? содержит группа объект 
+        /// </summary>
+        /// <param name="p"></param>
+
+        private void OnDeleteGroupCommandExecuted(object p)
+        {
+            if (!(p is Group group)) return;
+            var group_index = Groups.IndexOf(group);
+
+            Groups.Remove((group));
+            if(group_index < Groups.Count)
+            {
+                SelectedGroup = Groups[group_index];
+            }
+        }
+        #endregion
+
+        #endregion
+  
+        /* ------------------------------------------------------------------------------------*/
         public MainWindowViewModel()
         {
 
-            #region Команды
+            #region  Объекты Команд
             CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute,CanChangeTabIndexCommandExecute);
+            CreateNewGroupCommand = new LambdaCommand(OnCreateNewGroupCommandExexuted, CanCreateNewGroupCommandExexuted);
+            DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecuted);
             #endregion
 
             var tmp = new PlotModel { Title = "Статистика" };
@@ -123,6 +208,37 @@ namespace PR22.ViewModels
             tmp.Series.Add(series1);
             
             Model = tmp;
+
+            var student_index = 1;
+
+            var students = Enumerable.Range(1, 10).Select(i => new Student
+            {
+                Name = $"Name {student_index}",
+                Surname = $"Surname {student_index}",
+                Patronymic = $"Patronymic {student_index++}",
+                Birthday = DateTime.Now,
+                Rating =0
+            });
+
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+                {
+                Name = $"Группа {i}",
+                Students = new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
+
+
+            var dat_list = new List<object>();
+
+            dat_list.Add("Hello World");
+            dat_list.Add(42);
+            var groupp = Groups[1];
+            dat_list.Add(groupp);
+            dat_list.Add(groupp.Students[0]);
+
+            CompositeCollection = dat_list.ToArray();
+
 
         }
         public PlotModel Model { get; private set; }
