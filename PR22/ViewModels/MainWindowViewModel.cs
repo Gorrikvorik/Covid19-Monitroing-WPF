@@ -7,15 +7,17 @@ using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace PR22.ViewModels
 {
-     internal class MainWindowViewModel : ViewModel
+    internal class MainWindowViewModel : ViewModel
     {
 
 
@@ -42,13 +44,77 @@ namespace PR22.ViewModels
         #region SelectedGroup : Group - Выбранная группа
         /// <summary>Выбранная группа</summary>
 
-        private Group _SelectedGroup  ;
+        private Group _SelectedGroup;
         /// <summary>Выбранная группа</summary>
         public Group SelectedGroup
         {
             get => _SelectedGroup;
-            set => Set(ref _SelectedGroup, value);
+            set
+            {
+
+                if (!Set(ref _SelectedGroup, value)) return;
+
+                _SelectedGroupStudends.Source = value?.Students;
+                OnPropertyChanged(nameof(SelectedGroupStudends)); // уведомление интерфейса об изменении второго свойства
+                                                                  //  Тут можно уведомлять сколько угодно других свойств
+            }
+
+
         }
+        #endregion
+
+        # region StudentFilterText : string - текст фильтра студентов
+
+        /// <summary>
+        ///  Текст фильтра студентов
+        /// </summary>
+        private string _StudentFilterText;
+
+        /// <summary>
+        /// Текст фильтра студентов
+        /// </summary>
+        public string StudentFilterText
+        {
+            get => _StudentFilterText;
+            set
+            {
+                if (!Set(ref _StudentFilterText, value)) return;
+                _SelectedGroupStudends.View.Refresh();
+            }
+        }
+
+        #endregion
+
+        #region SelectedGroupStudends
+
+        private readonly CollectionViewSource _SelectedGroupStudends = new CollectionViewSource();
+        private void OnStudentFiltred(object sender, FilterEventArgs e)
+        {
+            if (!(e.Item is Student student))
+            {
+
+                e.Accepted = false;
+                return;
+            }
+
+            var filter_text = _StudentFilterText;
+            if (string.IsNullOrEmpty(filter_text))
+                return;
+           
+            if (student.Name is null || student.Surname is null || student.Patronymic is null)
+            {
+                e.Accepted = false;
+                return;
+            }
+
+            if (student.Name.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return ;
+            if (student.Surname.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return ;
+            if (student.Patronymic.Contains(filter_text, StringComparison.OrdinalIgnoreCase)) return ;
+            e.Accepted = false;
+        }
+
+        public ICollectionView SelectedGroupStudends => _SelectedGroupStudends?.View;
+
         #endregion
 
 
@@ -56,7 +122,7 @@ namespace PR22.ViewModels
         /// <summary>
         /// номер вкладки
         /// </summary>
-        private int _SelectedPageIndex;
+        private int _SelectedPageIndex = 1;
         public int SelectedPageIndex
         {
             get => _SelectedPageIndex;
@@ -246,8 +312,16 @@ namespace PR22.ViewModels
 
             CompositeCollection = dat_list.ToArray();
 
+            _SelectedGroupStudends.Filter += OnStudentFiltred;
 
+            //_SelectedGroupStudends.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
+            //_SelectedGroupStudends.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
         }
+
+     
+
         public PlotModel Model { get; private set; }
+
+       
     }
 }
