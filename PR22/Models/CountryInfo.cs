@@ -4,6 +4,6 @@ namespace PR22.Models
 {
     internal class CountryInfo : PlaceInfo 
     { 
-        public IEnumerable<ProvinceInfo> provinceCounts { get; set; }    
+        public IEnumerable<PlaceInfo> provinceCounts { get; set; }    
     }
 }
