@@ -179,6 +179,22 @@ namespace PR22.ViewModels
                 Surname = $"Фамилия {i}"
             });
 
+
+        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
+
+        #region  SelectedDirectory : DirectoryViewModel - Выбранная директория
+
+        /// <summary> /// Выбранная директория</summary>
+        private DirectoryViewModel _SelectedDirectory;
+        /// <summary> /// Выбранная директория</summary>
+        public DirectoryViewModel SelectedDirectory
+        {
+            get => _SelectedDirectory;
+ 
+            set => Set(ref _SelectedDirectory, value);
+        }
+        #endregion
+
         /* ------------------------------------------------------------------------------------*/
 
 
@@ -318,10 +334,12 @@ namespace PR22.ViewModels
             //_SelectedGroupStudends.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
         }
 
-     
+
+        /* ------------------------------------------------------------------------------------*/
+
 
         public PlotModel Model { get; private set; }
 
-       
+        /* ------------------------------------------------------------------------------------*/
     }
 }
