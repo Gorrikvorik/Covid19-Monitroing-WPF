@@ -70,8 +70,19 @@
                     <!--<TextBlock Text="{Binding Source={x:Static l:App.IsDesignModel}}"/>-->
                     
                     <ListBox HorizontalAlignment="Left" Width="200" Margin="30"
-                             ItemsSource="{Binding TestStudents}" >
+                             ItemsSource="{Binding TestStudents}" 
+                             VirtualizingPanel.IsVirtualizing="True"
+                             VirtualizingPanel.VirtualizationMode="Recycling"
+                             VirtualizingPanel.IsContainerVirtualizable="True">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel>
+                                    
+                                </VirtualizingStackPanel>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
                         <ListBox.ItemContainerStyle>
+                            
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
                             </Style>
@@ -81,12 +92,12 @@
                                 <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="3"
                                         Padding="3" >
                                     <Border.CacheMode>
-                                        <BitmapCache/>
+                                        <BitmapCache RenderAtScale="1"/>
                                     </Border.CacheMode>
                                     <StackPanel>
                                         <TextBlock Text="{Binding Surname}" ToolTip="{Binding Name}"/>
                                         <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Patronymic}" ToolTip="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Patronymic, TargetNullValue=--}" ToolTip="{Binding Name}"/>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -214,7 +225,9 @@
                                 
                                   GridLinesVisibility="Vertical"
                                   VerticalGridLinesBrush="DarkGray"
-                                  AlternatingRowBackground="LightGray">
+                                  AlternatingRowBackground="LightGray"
+                                      EnableRowVirtualization="True">
+                                  
                                 <!--HorizontalGridLinesBrush="Transparent"-->
 
                                 <DataGrid.Columns>
@@ -222,14 +235,6 @@
                                     <DataGridTextColumn Header="Имя" Binding="{Binding Name}" IsReadOnly="False"/>
                                     <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" IsReadOnly="False"/>
                                     <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}" IsReadOnly="False"/>
-                                    <!--<DataGridTextColumn Header="Дата Рождения" Binding="{Binding Birthday,StringFormat=dd.MM.yyyy}"/>-->
-                                    <!--<DataGridTemplateColumn Header="Дата Рождения">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate DataType="decanat.Student" >
-                                            <DatePicker SelectedDate="{Binding Birthday}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>-->
                                     <DataGridTemplateColumn Header="Дата Рождения">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate DataType="decanat.Student">
