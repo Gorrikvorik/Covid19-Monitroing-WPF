@@ -7,6 +7,7 @@
         xmlns:cmd="clr-namespace:PR22.Infrastructure.Commands"
         xmlns:vm="clr-namespace:PR22.ViewModels"
         xmlns:decanat="clr-namespace:PR22.Models.Decanat"
+        xmlns:view ="clr-namespace:PR22.Views"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         
         xmlns:oxy="http://oxyplot.org/wpf"
@@ -64,46 +65,10 @@
             </StatusBarItem>
 
         </StatusBar>
-        <TabControl SelectedIndex="{Binding SelectedPageIndex}"  >
-            <TabItem Header="Тестирование виртуализации" Visibility="Collapsed">
-                <Grid>
-                    <!--<TextBlock Text="{Binding Source={x:Static l:App.IsDesignModel}}"/>-->
-                    
-                    <ListBox HorizontalAlignment="Left" Width="200" Margin="30"
-                             ItemsSource="{Binding TestStudents}" 
-                             VirtualizingPanel.IsVirtualizing="True"
-                             VirtualizingPanel.VirtualizationMode="Recycling"
-                             VirtualizingPanel.IsContainerVirtualizable="True">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel>
-                                    
-                                </VirtualizingStackPanel>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemContainerStyle>
-                            
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="decanat:Student">
-                                <Border BorderBrush="Blue" BorderThickness="1" CornerRadius="3"
-                                        Padding="3" >
-                                    <Border.CacheMode>
-                                        <BitmapCache RenderAtScale="1"/>
-                                    </Border.CacheMode>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Surname}" ToolTip="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Name}" ToolTip="{Binding Name}"/>
-                                        <TextBlock Text="{Binding Patronymic, TargetNullValue=--}" ToolTip="{Binding Name}"/>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
+        <TabControl >
+            <TabItem Header="Статистика">
+                <view:CountriesStatisticView/>
+
             </TabItem>
             <!--<TabItem Header="Разнородые данные" Height="20" VerticalAlignment="Top">
                 <Grid >
@@ -148,7 +113,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>-->
-            <TabItem Header="Студенты" >
+            <TabItem Header="Студенты" Visibility="Collapsed" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--<ColumnDefinition Width="3*"></ColumnDefinition>
@@ -181,8 +146,8 @@
                             </DockPanel>
                             <UniformGrid DockPanel.Dock="Bottom" Rows="1" Margin="0,3" >
  
-                                <Button   Content="Добавить" Padding="0,7" Style="{StaticResource CheckButtonStyle}" Command="{Binding CreateNewGroupCommand}"/>
-                                <Button Content="Удалить"    Padding="0,7" Style="{StaticResource RemoveButtonStyle}"   Command="{Binding DeleteGroupCommand}" 
+                                <Button   Content="Добавить" Padding="0,7" Style="{StaticResource CheckButtonStyle}"   />
+                                <Button Content="Удалить"    Padding="0,7" Style="{StaticResource RemoveButtonStyle}"   
                                         CommandParameter="{Binding SelectedGroup}"></Button>
                                 
                             </UniformGrid>
@@ -278,7 +243,7 @@
 
                 </oxy:PlotView>
             </TabItem>
-            <TabItem Header="Файловая система">
+            <!--<TabItem Header="Файловая система">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="250"/>
@@ -308,13 +273,14 @@
                         
                         
                     </GroupBox>
-                    <!--<GroupBox Grid.Column="1" Header="Файлы">
+                    -->
+            <!--<GroupBox Grid.Column="1" Header="Файлы">
                         <ListBox SelectedItem="{Binding SelectedDirectory.Files,Mode=TwoWay}">
                           
                         </ListBox>
-                    </GroupBox>-->
+                    </GroupBox>--><!--
                 </Grid>
-            </TabItem>
+            </TabItem>-->
 
             <!--<TabItem Header="Вкладка 2">
                 <Button Margin="20,40" VerticalAlignment="Top" HorizontalAlignment="Left"  Padding="14,5" Opacity="1"

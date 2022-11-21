@@ -180,20 +180,8 @@ namespace PR22.ViewModels
             });
 
 
-        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
-
-        #region  SelectedDirectory : DirectoryViewModel - Выбранная директория
-
-        /// <summary> /// Выбранная директория</summary>
-        private DirectoryViewModel _SelectedDirectory;
-        /// <summary> /// Выбранная директория</summary>
-        public DirectoryViewModel SelectedDirectory
-        {
-            get => _SelectedDirectory;
- 
-            set => Set(ref _SelectedDirectory, value);
-        }
-        #endregion
+     
+         
 
         /* ------------------------------------------------------------------------------------*/
 
@@ -277,6 +265,8 @@ namespace PR22.ViewModels
             DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecuted);
             #endregion
 
+            #region - создание точек
+
             var tmp = new PlotModel { Title = "Статистика" };
             var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Square };
             var data_points = new List<Models.DataPoint>((int)(360 / 0.1));
@@ -297,41 +287,44 @@ namespace PR22.ViewModels
             tmp.Series.Add(series1);
             
             Model = tmp;
+            #endregion
 
-            var student_index = 1;
+            //#region создание студентов с группами
+            //var student_index = 1;
 
-            var students = Enumerable.Range(1, 10).Select(i => new Student
-            {
-                Name = $"Name {student_index}",
-                Surname = $"Surname {student_index}",
-                Patronymic = $"Patronymic {student_index++}",
-                Birthday = DateTime.Now,
-                Rating =0
-            });
+            //var students = Enumerable.Range(1, 10).Select(i => new Student
+            //{
+            //    Name = $"Name {student_index}",
+            //    Surname = $"Surname {student_index}",
+            //    Patronymic = $"Patronymic {student_index++}",
+            //    Birthday = DateTime.Now,
+            //    Rating =0
+            //});
 
-            var groups = Enumerable.Range(1, 20).Select(i => new Group
-                {
-                Name = $"Группа {i}",
-                Students = new ObservableCollection<Student>(students)
-            });
+            //var groups = Enumerable.Range(1, 20).Select(i => new Group
+            //    {
+            //    Name = $"Группа {i}",
+            //    Students = new ObservableCollection<Student>(students)
+            //});
 
-            Groups = new ObservableCollection<Group>(groups);
+            //Groups = new ObservableCollection<Group>(groups);
 
 
-            var dat_list = new List<object>();
+            //var dat_list = new List<object>();
 
-            dat_list.Add("Hello World");
-            dat_list.Add(42);
-            var groupp = Groups[1];
-            dat_list.Add(groupp);
-            dat_list.Add(groupp.Students[0]);
+            //dat_list.Add("Hello World");
+            //dat_list.Add(42);
+            //var groupp = Groups[1];
+            //dat_list.Add(groupp);
+            //dat_list.Add(groupp.Students[0]);
 
-            CompositeCollection = dat_list.ToArray();
+            //CompositeCollection = dat_list.ToArray();
 
-            _SelectedGroupStudends.Filter += OnStudentFiltred;
+            //_SelectedGroupStudends.Filter += OnStudentFiltred;
 
-            //_SelectedGroupStudends.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
-            //_SelectedGroupStudends.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
+            //#endregion
+
+            
         }
 
 

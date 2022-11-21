@@ -10,7 +10,7 @@ namespace PR22.Models
     {
         public string Name { get; set; }
 
-        public Point Location { get; set; }
+        public virtual Point Location { get; set; }
 
         public IEnumerable<ComfirmedCoiunt> Counts { get; set; }
 

@@ -16,10 +16,7 @@ namespace PR22
 
             var service_test = new DataService();
 
-
-            var countries = service_test.
-                GetData().
-                ToArray();
+ 
         }
     }
 }
