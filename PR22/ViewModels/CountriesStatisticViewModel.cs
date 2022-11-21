@@ -35,6 +35,17 @@ namespace PR22.ViewModels
         #endregion
 
 
+        #region SelectedCountry : CountryInfo - Выбранная страна
+
+        private CountryInfo _SelectedCountry;
+
+        public  CountryInfo SelectedCountry
+        {
+            get => _SelectedCountry;
+            private set => Set(ref _SelectedCountry, value);
+        }
+
+        #endregion
         #region Команды
         public ICommand RefreshDataCommand { get; }
 

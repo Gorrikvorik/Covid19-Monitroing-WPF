@@ -23,7 +23,17 @@
                         <TextBlock Text="Загрузить данные"/>
                     </StackPanel>
                 </Button>
-                <ListBox ItemsSource="{Binding Countries}"/>
+                <ListBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="m:CountryInfo">
+                            <TextBlock >
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Location}"/>
+                            </TextBlock>
+                      
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </DockPanel>
           
         </GroupBox>
@@ -33,6 +43,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  Panel.ZIndex="1000" />
             </Grid>
         </GroupBox>
