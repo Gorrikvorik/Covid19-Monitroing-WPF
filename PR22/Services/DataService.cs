@@ -87,11 +87,11 @@ namespace PR22.Services
                 var country = new CountryInfo
                 {
                     Name = country_info.Key,
-                    provinceCounts = country_info.Select(c => new PlaceInfo
+                    ProvinceCounts = country_info.Select(c => new PlaceInfo
                     {
                         Name = c.Province,
                         Location = new Point(c.Place.lat,c.Place.Lon),
-                        Counts = dates.Zip(c.Counts,(date,count) => new ComfirmedCoiunt { Date = date,Count = count})
+                        Counts = dates.Zip(c.Counts,(date,count) => new ComfirmedCount { Date = date,Count = count})
                     })
                 };
                 yield return country;

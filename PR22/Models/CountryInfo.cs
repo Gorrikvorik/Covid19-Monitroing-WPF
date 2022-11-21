@@ -15,14 +15,16 @@ namespace PR22.Models
                 if (_Location != null)
                     return (Point)_Location;
 
-                if (provinceCounts is null) return default;
+                if (ProvinceCounts is null) return default;
 
-                var average_x = provinceCounts.Average(p => p.Location.X);
-                var average_y = provinceCounts.Average(p => p.Location.Y);
+                var average_x = ProvinceCounts.Average(p => p.Location.X);
+                var average_y = ProvinceCounts.Average(p => p.Location.Y);
                 return (Point)(_Location = new Point(average_x, average_y));
             }
             set => _Location = value;
         }
-        public IEnumerable<PlaceInfo> provinceCounts { get; set; }    
+        public IEnumerable<PlaceInfo>? ProvinceCounts { get; set; }
+
+ 
     }
 }
