@@ -23,11 +23,15 @@ namespace PR22.ViewModels
 
         /* ------------------------------------------------------------------------------------*/
 
+        private readonly CountriesStatisticViewModel _CountriesStatistic;
+
+        #region Старые коллекции
         public ObservableCollection<Group> Groups { get; }
 
 
         public object[] CompositeCollection { get; }
 
+        #endregion
 
         #region SelectedCompositeValue: object - выбран непонятный компонент
         /// <summary>
@@ -258,8 +262,10 @@ namespace PR22.ViewModels
         public MainWindowViewModel()
         {
 
+
+            _CountriesStatistic = new CountriesStatisticViewModel(this);
             #region  Объекты Команд
-            CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+           CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute,CanChangeTabIndexCommandExecute);
             CreateNewGroupCommand = new LambdaCommand(OnCreateNewGroupCommandExexuted, CanCreateNewGroupCommandExexuted);
             DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecuted);
@@ -289,6 +295,7 @@ namespace PR22.ViewModels
             Model = tmp;
             #endregion
 
+            #region Создание студентов
             //#region создание студентов с группами
             //var student_index = 1;
 
@@ -324,7 +331,8 @@ namespace PR22.ViewModels
 
             //#endregion
 
-            
+            #endregion
+
         }
 
 
