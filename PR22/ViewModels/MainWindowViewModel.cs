@@ -90,7 +90,7 @@ namespace PR22.ViewModels
         private readonly CollectionViewSource _SelectedGroupStudends = new CollectionViewSource();
         private void OnStudentFiltred(object sender, FilterEventArgs e)
         {
-            if (!(e.Item is Student student))
+            if (e.Item is not Student student)
             {
 
                 e.Accepted = false;
@@ -253,7 +253,7 @@ namespace PR22.ViewModels
 
         private void OnDeleteGroupCommandExecuted(object p)
         {
-            if (!(p is Group group)) return;
+            if (p is not Group group) return;
             var group_index = Groups.IndexOf(group);
 
             Groups.Remove((group));

@@ -23,7 +23,7 @@ namespace PR22.Services
             return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
 
-        private static IEnumerable<String> GetDataLines()
+        private static IEnumerable<string> GetDataLines()
         {
             using var data_stream = GetDataStream().Result;
             using var data_reader = new StreamReader(data_stream);
@@ -32,7 +32,9 @@ namespace PR22.Services
             {
                 var line = data_reader.ReadLine();
                 if (string.IsNullOrEmpty(line)) continue;
-                yield return line.Replace("Korea,", "Korea -");
+                yield return line.
+                    Replace("Korea,", "Korea -").
+                    Replace("Bonaire,","Bonaire -");
             }
         }
 
