@@ -24,5 +24,7 @@ namespace PR22.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }
