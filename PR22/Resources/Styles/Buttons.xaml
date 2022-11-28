@@ -3,7 +3,7 @@
                     xmlns:fa="http://schemas.fontawesome.com/icons/" >
 
 <Style x:Key="BtnBase" TargetType="ButtonBase">
-    <Setter Property="Background" Value="White"/>
+    <Setter Property="Background" Value="{StaticResource WhiteBrush}"/>
 </Style>
 
 
@@ -17,7 +17,8 @@
 
 </Style>
 <Style x:Key="DangerBtn" TargetType="Button" BasedOn="{StaticResource BtnBase}">
-    <Setter Property="Background" Value="Red"></Setter>
+    <Setter Property="Background" Value="{StaticResource WhiteBrush}"></Setter>
+    <Setter Property="Foreground" Value="{StaticResource RedBrush}"></Setter>
 </Style>
 
 <Style x:Key="FocusVisual">

@@ -44,14 +44,18 @@
         </GroupBox>
         <GroupBox Grid.Column="1" Header="Информация">
             <Grid >
+                <Grid.Resources>
+                    <c:Ratio k="2" x:Key="Ratio2"/>
+                    <c:Linear K="5" B="3" x:Key="Linear_K5_B3" />
+                </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  Panel.ZIndex="1000" />
-                <Slider Grid.Row="0" Name="ValueSlider"></Slider>
-                <TextBlock Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider}"/>
+                <Slider Grid.Row="0" Name="ValueSlider" Maximum="100" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"></Slider>
+                <TextBox Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider , Converter={StaticResource Ratio2},UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"/>
             </Grid>
         </GroupBox>
     </Grid>

@@ -1,6 +1,7 @@
 ﻿using PR22.Services;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 
 namespace PR22
 {
@@ -15,6 +16,11 @@ namespace PR22
             base.OnStartup(e);
 
             var service_test = new DataService();
+
+            var brush = new SolidColorBrush(Colors.Wheat);
+            brush.Freeze();
+            brush.Clone();
+ 
 
  
         }
