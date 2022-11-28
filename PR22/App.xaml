@@ -6,7 +6,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="Resources\Base\Brushes.xaml"></ResourceDictionary>
+                
                 <ResourceDictionary Source="Resources\Styles\Buttons.xaml"/>
+                <ResourceDictionary Source="Resources\Styles\GridSpliiters.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

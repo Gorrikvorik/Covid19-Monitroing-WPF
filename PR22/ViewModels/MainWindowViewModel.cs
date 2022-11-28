@@ -14,20 +14,26 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
 
 namespace PR22.ViewModels
 {
+    [MarkupExtensionReturnType(typeof(MainWindowViewModel))]
     internal class MainWindowViewModel : ViewModel
     {
 
 
         /* ------------------------------------------------------------------------------------*/
 
+        public   CountriesStatisticViewModel  CountriesStatistic { get; }
+
+        #region Старые коллекции
         public ObservableCollection<Group> Groups { get; }
 
 
         public object[] CompositeCollection { get; }
 
+        #endregion
 
         #region SelectedCompositeValue: object - выбран непонятный компонент
         /// <summary>
@@ -90,7 +96,7 @@ namespace PR22.ViewModels
         private readonly CollectionViewSource _SelectedGroupStudends = new CollectionViewSource();
         private void OnStudentFiltred(object sender, FilterEventArgs e)
         {
-            if (!(e.Item is Student student))
+            if (e.Item is not Student student)
             {
 
                 e.Accepted = false;
@@ -172,28 +178,10 @@ namespace PR22.ViewModels
         #endregion
 
 
-        public IEnumerable<Student> TestStudents => Enumerable.Range(1, App.IsDesignModel ? 10: 100_000)
-            .Select(i => new Student
-            {
-                Name = $"Имя {i}",
-                Surname = $"Фамилия {i}"
-            });
+     
 
-
-        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel("c:\\");
-
-        #region  SelectedDirectory : DirectoryViewModel - Выбранная директория
-
-        /// <summary> /// Выбранная директория</summary>
-        private DirectoryViewModel _SelectedDirectory;
-        /// <summary> /// Выбранная директория</summary>
-        public DirectoryViewModel SelectedDirectory
-        {
-            get => _SelectedDirectory;
- 
-            set => Set(ref _SelectedDirectory, value);
-        }
-        #endregion
+     
+         
 
         /* ------------------------------------------------------------------------------------*/
 
@@ -206,7 +194,8 @@ namespace PR22.ViewModels
 
         private void onCloseApplicationCommandExecuted(object p)
         {
-            Application.Current.Shutdown();
+            (RootObject as Window)?.Close();
+            //Application.Current.Shutdown();
         }
         private bool CanCloseApplicationCommandExecute(object p) => true;
 
@@ -253,7 +242,7 @@ namespace PR22.ViewModels
 
         private void OnDeleteGroupCommandExecuted(object p)
         {
-            if (!(p is Group group)) return;
+            if (p is not Group group) return;
             var group_index = Groups.IndexOf(group);
 
             Groups.Remove((group));
@@ -270,12 +259,16 @@ namespace PR22.ViewModels
         public MainWindowViewModel()
         {
 
+
+             CountriesStatistic = new CountriesStatisticViewModel(this);
             #region  Объекты Команд
-            CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+           CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute,CanChangeTabIndexCommandExecute);
             CreateNewGroupCommand = new LambdaCommand(OnCreateNewGroupCommandExexuted, CanCreateNewGroupCommandExexuted);
             DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecuted);
             #endregion
+
+            #region - создание точек
 
             var tmp = new PlotModel { Title = "Статистика" };
             var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Square };
@@ -297,41 +290,46 @@ namespace PR22.ViewModels
             tmp.Series.Add(series1);
             
             Model = tmp;
+            #endregion
 
-            var student_index = 1;
+            #region Создание студентов
+            //#region создание студентов с группами
+            //var student_index = 1;
 
-            var students = Enumerable.Range(1, 10).Select(i => new Student
-            {
-                Name = $"Name {student_index}",
-                Surname = $"Surname {student_index}",
-                Patronymic = $"Patronymic {student_index++}",
-                Birthday = DateTime.Now,
-                Rating =0
-            });
+            //var students = Enumerable.Range(1, 10).Select(i => new Student
+            //{
+            //    Name = $"Name {student_index}",
+            //    Surname = $"Surname {student_index}",
+            //    Patronymic = $"Patronymic {student_index++}",
+            //    Birthday = DateTime.Now,
+            //    Rating =0
+            //});
 
-            var groups = Enumerable.Range(1, 20).Select(i => new Group
-                {
-                Name = $"Группа {i}",
-                Students = new ObservableCollection<Student>(students)
-            });
+            //var groups = Enumerable.Range(1, 20).Select(i => new Group
+            //    {
+            //    Name = $"Группа {i}",
+            //    Students = new ObservableCollection<Student>(students)
+            //});
 
-            Groups = new ObservableCollection<Group>(groups);
+            //Groups = new ObservableCollection<Group>(groups);
 
 
-            var dat_list = new List<object>();
+            //var dat_list = new List<object>();
 
-            dat_list.Add("Hello World");
-            dat_list.Add(42);
-            var groupp = Groups[1];
-            dat_list.Add(groupp);
-            dat_list.Add(groupp.Students[0]);
+            //dat_list.Add("Hello World");
+            //dat_list.Add(42);
+            //var groupp = Groups[1];
+            //dat_list.Add(groupp);
+            //dat_list.Add(groupp.Students[0]);
 
-            CompositeCollection = dat_list.ToArray();
+            //CompositeCollection = dat_list.ToArray();
 
-            _SelectedGroupStudends.Filter += OnStudentFiltred;
+            //_SelectedGroupStudends.Filter += OnStudentFiltred;
 
-            //_SelectedGroupStudends.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Descending));
-            //_SelectedGroupStudends.GroupDescriptions.Add(new PropertyGroupDescription("Name"));
+            //#endregion
+
+            #endregion
+
         }
 
 
