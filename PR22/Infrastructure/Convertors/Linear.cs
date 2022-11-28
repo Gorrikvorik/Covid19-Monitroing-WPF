@@ -17,9 +17,11 @@ namespace PR22.Infrastructure.Convertors
     /// </summary>
     /// 
     [ValueConversion(typeof(double), typeof(double))]
+    [MarkupExtensionReturnType(typeof(Linear))]
     internal class Linear : Convertor
     {
         [ConstructorArgument("K")]
+        
         public double K { get; set; } = 1;
 
 

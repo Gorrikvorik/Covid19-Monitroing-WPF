@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace PR22.Infrastructure.Convertors
 {
     [ValueConversion(typeof(Point),typeof(string))]
+    [MarkupExtensionReturnType(typeof(LocationPointToStr))]
     internal class LocationPointToStr : Convertor
     {
         public override object Convert(object value, Type t, object p, CultureInfo c)

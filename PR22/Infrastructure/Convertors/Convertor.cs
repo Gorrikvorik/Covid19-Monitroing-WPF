@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Markup;
 
 namespace PR22.Infrastructure.Convertors
 {
-    internal abstract class Convertor : IValueConverter
+    internal abstract class Convertor : MarkupExtension,IValueConverter
     {
+        public override object ProvideValue(IServiceProvider serviceProvider) => this;
+
         public abstract object Convert(object value, Type targetType, object parameter, CultureInfo culture);
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
