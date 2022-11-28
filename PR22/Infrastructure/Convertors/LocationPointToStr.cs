@@ -9,6 +9,7 @@ using System.Windows.Data;
 
 namespace PR22.Infrastructure.Convertors
 {
+    [ValueConversion(typeof(Point),typeof(string))]
     internal class LocationPointToStr : Convertor
     {
         public override object Convert(object value, Type t, object p, CultureInfo c)

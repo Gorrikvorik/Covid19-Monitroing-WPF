@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PR22" 
+             xmlns:sys="clr-namespace:System;assembly=System" 
              xmlns:vm="clr-namespace:PR22.ViewModels" 
              xmlns:c="clr-namespace:PR22.Infrastructure.Convertors"
-             xmlns:fa="http://schemas.fontawesome.com/icons/"
+             xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:sys1="clr-namespace:System;assembly=netstandard"
              d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel, d:IsDesignTimeCreatable=True}"
              
              d:DesignHeight="450" d:DesignWidth="800">
@@ -45,8 +46,20 @@
         <GroupBox Grid.Column="1" Header="Информация">
             <Grid >
                 <Grid.Resources>
+                    <sys1:Double x:Key="value3">
+                        3
+                    </sys1:Double>
+                    <c:CompositeConvertor x:Key="TestConvertor" >
+                        <c:CompositeConvertor.First>
+                            <c:Linear K="5"/>
+                        </c:CompositeConvertor.First>
+                        <c:CompositeConvertor.Second>
+                            <c:Linear K="-3" B="10"/>
+                        </c:CompositeConvertor.Second>
+                    </c:CompositeConvertor>
+                    
                     <c:Ratio k="2" x:Key="Ratio2"/>
-                    <c:Linear K="5" B="3" x:Key="Linear_K5_B3" />
+                    <c:Linear K="5" B="{StaticResource value3}" x:Key="Linear_K5_B3" />
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -55,7 +68,7 @@
                 
                 <GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  Panel.ZIndex="1000" />
                 <Slider Grid.Row="0" Name="ValueSlider" Maximum="100" ToolTip="{Binding Value,RelativeSource={RelativeSource Self}}"></Slider>
-                <TextBox Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider , Converter={StaticResource Ratio2},UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"/>
+                <TextBox Grid.Row="0" Margin="0,30,0,0" Text="{Binding Value, ElementName=ValueSlider , Converter={StaticResource TestConvertor},UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200"/>
             </Grid>
         </GroupBox>
     </Grid>
