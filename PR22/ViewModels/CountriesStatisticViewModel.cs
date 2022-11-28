@@ -1,4 +1,7 @@
-﻿using PR22.Infrastructure.Commands;
+﻿using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using PR22.Infrastructure.Commands;
 using PR22.Models;
 using PR22.Services;
 using PR22.ViewModels.Base;
@@ -90,6 +93,51 @@ namespace PR22.ViewModels
             #region Команды
             RefreshDataCommand = new LambdaCommand(OnRefreshDataCommandExecuted);
             #endregion
+
+
+
+
+            #region - создание точек
+
+            var tmp = new PlotModel { Title = "Статистика" };
+            tmp.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Title ="Число",
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dash,
+                
+            });
+            tmp.Axes.Add(new DateTimeAxis
+            {
+                Position = AxisPosition.Bottom,
+                Title = "Дата",
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dash
+            });
+            var series1 = (new LineSeries
+            {
+                StrokeThickness = 2,
+                Color = OxyColors.Red,
+                ItemsSource = SelectedCountry?.Counts
+ 
+
+
+            });
+            series1.DataFieldX = SelectedCountry?.Location.X.ToString() ?? "0";
+            series1.DataFieldY = SelectedCountry?.Location.Y.ToString()?? "0";
+            tmp.Series.Add(series1);
+          
+
+ 
+
+            Model = tmp;
+
+
+            #endregion
         }
+        public PlotModel Model { get; private set; }
+
+
     }
 }
