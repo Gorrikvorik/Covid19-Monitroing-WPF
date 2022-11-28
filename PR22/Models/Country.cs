@@ -14,5 +14,7 @@ namespace PR22.Models
 
         public virtual IEnumerable<ComfirmedCount> Counts { get; set; }
 
+        public override string ToString() => $"{Name}({Location})";
+
     }
 }

@@ -241,10 +241,10 @@
             </TabItem>
 
             <TabItem Header="График"  Visibility="Collapsed" >
-                <oxy:PlotView Model="{Binding Model}"  >
+                <!--<oxy:PlotView Model="{Binding Model}"  >
 
 
-                </oxy:PlotView>
+                </oxy:PlotView>-->
             </TabItem>
             <!--<TabItem Header="Файловая система">
                 <Grid>

@@ -45,7 +45,7 @@ namespace PR22.ViewModels
         public  CountryInfo SelectedCountry
         {
             get => _SelectedCountry;
-            private set => Set(ref _SelectedCountry, value);
+            set => Set(ref _SelectedCountry, value);
         }
 
         #endregion
@@ -71,7 +71,7 @@ namespace PR22.ViewModels
                     .Select(i => new CountryInfo
                     {
                         Name = $"Country {i}",
-                        ProvinceCounts = Enumerable.Range(1, 10).Select(j => new PlaceInfo
+                        Provinces = Enumerable.Range(1, 10).Select(j => new PlaceInfo
                         {
                             Name = $"Province {i}",
                             Location = new Point(i, j),
@@ -119,13 +119,16 @@ namespace PR22.ViewModels
             {
                 StrokeThickness = 2,
                 Color = OxyColors.Red,
-                ItemsSource = SelectedCountry?.Counts
- 
+                ItemsSource = SelectedCountry?.Counts ,
+                //DataFieldX =SelectedCountry?.Location.X.ToString(),
+                //DataFieldY =SelectedCountry?.Location.Y.ToString()
+                
+                
+                
 
 
             });
-            series1.DataFieldX = SelectedCountry?.Location.X.ToString() ?? "0";
-            series1.DataFieldY = SelectedCountry?.Location.Y.ToString()?? "0";
+       
             tmp.Series.Add(series1);
           
 

@@ -10,7 +10,9 @@
              xmlns:c="clr-namespace:PR22.Infrastructure.Convertors"
              xmlns:fa="http://schemas.fontawesome.com/icons/" xmlns:sys1="clr-namespace:System;assembly=netstandard"
              xmlns:oxy="http://oxyplot.org/wpf"
-             d:DataContext="{d:DesignInstance vm:CountriesStatisticViewModel, d:IsDesignTimeCreatable=True}"
+             
+             xmlns:m="clr=namespace:MapControl;assembly=MapControl.WPF" xmlns:m1="clr-namespace:MapControl;assembly=MapControl.WPF"
+            
              
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -30,7 +32,7 @@
                         <TextBlock Text="Загрузить данные"/>
                     </StackPanel>
                 </Button>
-                <ListBox ItemsSource="{Binding Countries}"  SelectedItem="{Binding SelectedCountry,Mode=OneWay}">
+                <ListBox ItemsSource="{Binding Countries}"  SelectedItem="{Binding SelectedCountry}">
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="m:CountryInfo">
                        
@@ -94,11 +96,16 @@
 
                     </ListBox>
                 </Border>-->
-
-                <oxy:PlotView Grid.Row="0"  Model="{Binding Model}">
- 
-                     
-                </oxy:PlotView>
+                <oxy:PlotView  Grid.Row="0"  />
+                <m1:Map Grid.Row="1"  ZoomLevel="4" MaxZoomLevel="21" Center="{Binding SelectedCountry.Location, Converter= {c:PointToMapLocation}}"  >
+                    <m1:MapScale Margin="4" Opacity="1"   Background="Transparent" VerticalAlignment="Bottom"/>
+                    <m1:MapGraticule Opacity="0.3" Background="Transparent"/>
+              
+                    <m1:Map.MapLayer>
+                        <m1:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"></m1:MapTileLayer>
+                        <!--<m1:MapTileLayer TileSource="http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"/>-->
+                    </m1:Map.MapLayer>
+                </m1:Map>
             </Grid>
         </GroupBox>
     </Grid>
