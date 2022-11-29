@@ -27,20 +27,20 @@ namespace PR22.Models
 
         public IEnumerable<PlaceInfo> Provinces { get; set; }
 
-        private IEnumerable<ComfirmedCount> _Counts;
+        private IEnumerable<ConfirmedCount> _Counts;
 
-        public override IEnumerable<ComfirmedCount> Counts
+        public override IEnumerable<ConfirmedCount> Counts
         {
             get
             {
                 if (_Counts != null) return _Counts;
 
                 var points_count = Provinces.FirstOrDefault()?.Counts?.Count() ?? 0;
-                if (points_count == 0) return Enumerable.Empty<ComfirmedCount>();
+                if (points_count == 0) return Enumerable.Empty<ConfirmedCount>();
 
                 var province_points = Provinces.Select(p => p.Counts.ToArray()).ToArray();
 
-                var points = new ComfirmedCount[points_count];
+                var points = new ConfirmedCount[points_count];
                 foreach (var province in province_points)
                     for (var i = 0; i < points_count; i++)
                     {

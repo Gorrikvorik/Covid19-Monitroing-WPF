@@ -1,4 +1,8 @@
-﻿using System;
+﻿using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using PR22.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +27,18 @@ namespace PR22.Views
         public CountriesStatisticView()
         {
             InitializeComponent();
-        }
+     
+    }
 
-        
+        private void Lb1_Selected(object sender, RoutedEventArgs e)
+        {
+
+       
+          
+
+
+
+
+        }
     }
 }

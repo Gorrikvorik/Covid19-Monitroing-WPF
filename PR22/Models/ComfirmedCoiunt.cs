@@ -2,7 +2,7 @@
 
 namespace PR22.Models
 {
-    internal struct ComfirmedCount
+    internal struct ConfirmedCount
     {
         public DateTime Date { get; set; }
 

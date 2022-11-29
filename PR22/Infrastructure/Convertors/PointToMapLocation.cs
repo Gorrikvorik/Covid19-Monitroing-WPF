@@ -24,7 +24,8 @@ namespace PR22.Infrastructure.Convertors
         public override object ConvertBack(object v, Type t, object p, CultureInfo c)
         {
             if (!(v is Location location)) return null;
-            return new Point(location.Latitude, location.Longitude);
+            // return new Point(location.Latitude, location.Longitude);
+            return null;
         }
     }
 }
