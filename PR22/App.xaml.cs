@@ -1,4 +1,7 @@
-﻿using PR22.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using PR22.Services;
+using PR22.ViewModels;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -10,19 +13,20 @@ namespace PR22
     {
         public static bool IsDesignModel { get; private set; } = true;
 
+        
+
         protected override void OnStartup(StartupEventArgs e)
         {
             IsDesignModel = false;
             base.OnStartup(e);
-
-            var service_test = new DataService();
-
-            var brush = new SolidColorBrush(Colors.Wheat);
-            brush.Freeze();
-            brush.Clone();
+                 
  
+        }
 
- 
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
+        {
+            services.AddSingleton<DataService>();
+            services.AddSingleton<CountriesStatisticViewModel>();
         }
     }
 }
