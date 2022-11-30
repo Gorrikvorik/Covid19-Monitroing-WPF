@@ -72,6 +72,9 @@
                 <view:CountriesStatisticView DataContext="{Binding CountriesStatistic}"/>
     
             </TabItem>
+            <TabItem Header="Отладка">
+                <!--<TextBlock Text="{x:Static sys:Environment.CurrentDirectory}"/>-->
+            </TabItem>
 
             <TabItem Header="Студенты" Visibility="Collapsed" >
                 <Grid>

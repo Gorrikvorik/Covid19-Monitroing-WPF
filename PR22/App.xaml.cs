@@ -3,7 +3,9 @@ using Microsoft.Extensions.Hosting;
 using PR22.Services;
 using PR22.ViewModels;
 using System;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 
@@ -46,6 +48,16 @@ namespace PR22
         {
             services.AddSingleton<DataService>();
             services.AddSingleton<CountriesStatisticViewModel>();
+
+            
         }
+
+
+        public static string? CurrentDirectory => 
+            IsDesignModel ? Path.GetDirectoryName(GetSourceCodePath())
+            : Environment.CurrentDirectory;
+
+
+        private static string GetSourceCodePath([CallerFilePath]string Path = null) => Path;
     }
 }

@@ -14,19 +14,19 @@ namespace PR22
             InitializeComponent();
         }
 
-        private void GroupsCollection_OnFilter(object sender, System.Windows.Data.FilterEventArgs e)
-        {
-            if (!(e.Item is Group group)) return;
-            if (group.Name is null) return;
+        //private void GroupsCollection_OnFilter(object sender, System.Windows.Data.FilterEventArgs e)
+        //{
+        //    if (!(e.Item is Group group)) return;
+        //    if (group.Name is null) return;
 
-            var filter_text = GroupNameFilterText.Text;
-            if (filter_text.Length == 0) return;
+        //    var filter_text = GroupNameFilterText.Text;
+        //    if (filter_text.Length == 0) return;
 
 
-            if (group.Name.Contains(filter_text, System.StringComparison.OrdinalIgnoreCase)) return;
-            if (group.Description != null && group.Description.Contains(filter_text,System.StringComparison.OrdinalIgnoreCase)) return;
-            e.Accepted = false;
-        }
+        //    if (group.Name.Contains(filter_text, System.StringComparison.OrdinalIgnoreCase)) return;
+        //    if (group.Description != null && group.Description.Contains(filter_text,System.StringComparison.OrdinalIgnoreCase)) return;
+        //    e.Accepted = false;
+        //}
 
         private void OnGroupsFilterTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
