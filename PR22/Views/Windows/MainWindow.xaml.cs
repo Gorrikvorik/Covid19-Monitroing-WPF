@@ -28,11 +28,11 @@ namespace PR22
         //    e.Accepted = false;
         //}
 
-        private void OnGroupsFilterTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            var text_box = (TextBox)sender;
-            var collection = (CollectionViewSource)text_box.FindResource("GroupsCollection");
-            collection.View.Refresh();
-        }
+        //private void OnGroupsFilterTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        //{
+        //    var text_box = (TextBox)sender;
+        //    var collection = (CollectionViewSource)text_box.FindResource("GroupsCollection");
+        //    collection.View.Refresh();
+        //}
     }
 }
