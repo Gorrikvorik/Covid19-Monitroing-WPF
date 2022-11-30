@@ -50,6 +50,7 @@ class Program {
             var counts = row.Skip(5)
                 .Select( s => int.Parse(s))
                 .ToArray();
+
             yield return(country_name, province, counts);
         }
 

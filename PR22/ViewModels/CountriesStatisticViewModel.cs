@@ -75,7 +75,7 @@ namespace PR22.ViewModels
                         {
                             Name = $"Province {i}",
                             Location = new Point(i, j),
-                            Counts = Enumerable.Range(1, 10).Select(k => new ComfirmedCount
+                            Counts = Enumerable.Range(1, 10).Select(k => new ConfirmedCount
                             {
                                 Date = DateTime.Now.Subtract(TimeSpan.FromDays(100 - k)),
                                 Count = k
@@ -97,49 +97,61 @@ namespace PR22.ViewModels
 
 
 
-            #region - создание точек
+          //  #region - создание точек
 
-            var tmp = new PlotModel { Title = "Статистика" };
-            tmp.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Left,
-                Title ="Число",
-                MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dash,
+          //  var tmp = new PlotModel { Title = "Статистика" };
+          //  tmp.Axes.Add(new LinearAxis
+          //  {
+          //      Position = AxisPosition.Left,
+          //      Title ="Число",
+          //      MajorGridlineStyle = LineStyle.Solid,
+          //      MinorGridlineStyle = LineStyle.Dash,
                 
-            });
-            tmp.Axes.Add(new DateTimeAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "Дата",
-                MajorGridlineStyle = LineStyle.Solid,
-                MinorGridlineStyle = LineStyle.Dash
-            });
-            var series1 = (new LineSeries
-            {
-                StrokeThickness = 2,
-                Color = OxyColors.Red,
-                ItemsSource = SelectedCountry?.Counts ,
-                //DataFieldX =SelectedCountry?.Location.X.ToString(),
-                //DataFieldY =SelectedCountry?.Location.Y.ToString()
-                
-                
-                
+          //  });
+          //  tmp.Axes.Add(new DateTimeAxis
+          //  {
+          //      Position = AxisPosition.Bottom,
+          //      Title = "Дата",
+          //      MajorGridlineStyle = LineStyle.Solid,
+          //      MinorGridlineStyle = LineStyle.Dash
+          //  });
+          ////  RefreshDataCommand.Execute(this);
+          //   foreach(var item in Countries )
+          //  {
+          //      tmp.Series.Add(new LineSeries
+          //      {
+          //          StrokeThickness = 2,
+          //          Color = OxyColors.Red,
+          //          ItemsSource = item?.Counts,
+          //          DataFieldX = "Date",
+          //          DataFieldY = "Count"
+          //      });
+          //  }
+            
+          //      var series1 = new LineSeries
+          //  {
+          //      StrokeThickness = 2,
+          //      Color = OxyColors.Red,
+          //      ItemsSource = SelectedCountry?.Counts,
+          //      DataFieldX = "Date",
+          //      DataFieldY = "Count"
 
 
-            });
-       
-            tmp.Series.Add(series1);
+
+
+          //  };
+          //  //var series1 = new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)");
           
-
+          //  tmp.Series.Add(series1);
+ 
  
 
-            Model = tmp;
+          //  Model = tmp;
 
 
-            #endregion
+          //  #endregion
         }
-        public PlotModel Model { get; private set; }
+        public PlotModel Model { get;  private set; }
 
 
     }
