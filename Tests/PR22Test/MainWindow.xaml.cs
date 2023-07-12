@@ -22,11 +22,11 @@ namespace PR22Test
         private void ComputeValue() 
         {
             var value = LongProcess(DateTime.Now);
-            if (ResultBlock.Dispatcher.CheckAccess())
-                ResultBlock.Text = value;
-            else
-                ResultBlock.Dispatcher.Invoke(() => ResultBlock.Text = value); // синхронный вызов
-                ResultBlock.Dispatcher.BeginInvoke(new Action(() => ResultBlock.Text = value)); //Асинхронный вызов
+            //if (ResultBlock.Dispatcher.CheckAccess())
+            //    ResultBlock.Text = value;
+            //else
+            //    ResultBlock.Dispatcher.Invoke(() => ResultBlock.Text = value); // синхронный вызов
+            //    ResultBlock.Dispatcher.BeginInvoke(new Action(() => ResultBlock.Text = value)); //Асинхронный вызов
         }
 
         private string LongProcess (DateTime Time)
