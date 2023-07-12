@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PR22.Services;
+using PR22.Services.Interfaces;
 using PR22.ViewModels;
 using System;
 using System.IO;
@@ -36,9 +37,7 @@ namespace PR22
         protected override async void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
-
             var host = Host;
-
             host.StopAsync().ConfigureAwait(false);
             host.Dispose();
             _Host = null;
@@ -46,8 +45,9 @@ namespace PR22
 
         public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<DataService>();
-            services.AddSingleton<MainWindowViewModel>();
+            services.AddTransient<IDataService,DataService>(); // временный объект, при запросе создается новый
+            services.AddSingleton<MainWindowViewModel>();// объект живет все время приложения
+
 
             services.AddSingleton<CountriesStatisticViewModel>();
 

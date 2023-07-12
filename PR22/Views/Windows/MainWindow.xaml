@@ -70,10 +70,11 @@
         <TabControl >
             <TabItem Header="Статистика">
                 <view:CountriesStatisticView DataContext="{Binding CountriesStatistic}"/>
-    
+
             </TabItem>
             <TabItem Header="Отладка">
                 <!--<TextBlock Text="{x:Static sys:Environment.CurrentDirectory}"/>-->
+ 
             </TabItem>
 
             <TabItem Header="График"  Visibility="Collapsed" >
@@ -117,7 +118,8 @@
                         <ListBox SelectedItem="{Binding SelectedDirectory.Files,Mode=TwoWay}">
                           
                         </ListBox>
-                    </GroupBox>--><!--
+                    </GroupBox>-->
+            <!--
                 </Grid>
             </TabItem>-->
 

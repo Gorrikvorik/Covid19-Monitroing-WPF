@@ -261,7 +261,7 @@ namespace PR22.ViewModels
         {
             CountriesStatistic = Statistic;
             Statistic.MainModel = this;
-            CountriesStatistic = App.Host.Services.GetRequiredService<CountriesStatisticViewModel>();
+            //CountriesStatistic = App.Host.Services.GetRequiredService<CountriesStatisticViewModel>();
             //CountriesStatistic = new CountriesStatisticViewModel(this);
             #region  Объекты Команд
             CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);

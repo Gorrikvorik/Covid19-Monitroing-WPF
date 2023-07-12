@@ -1,9 +1,11 @@
-﻿using OxyPlot;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using PR22.Infrastructure.Commands;
 using PR22.Models;
 using PR22.Services;
+using PR22.Services.Interfaces;
 using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,7 @@ namespace PR22.ViewModels
 
     {
 
-        private DataService _DataSerive;
+        private IDataService _DataSerive;
 
         public MainWindowViewModel MainModel { get; internal set; }
 
@@ -84,10 +86,17 @@ namespace PR22.ViewModels
         //            }).ToArray();
             
         //}
-        public CountriesStatisticViewModel(DataService DataSerive)
+        public CountriesStatisticViewModel(IDataService DataSerive)
         {
             _DataSerive = DataSerive;
-          
+            var data = App.Host.Services.GetRequiredService<IDataService>();
+            var are_ref_equal = ReferenceEquals(DataSerive, data);
+            //using (var scope = App.Host.Services.CreateScope())
+            //{
+            //    var data = scope.ServiceProvider.GetService<IDataService>();
+            //}
+              
+     
 
        
 
