@@ -2,6 +2,7 @@
 using OxyPlot;
 using OxyPlot.Series;
 using PR22.Infrastructure.Commands;
+using PR22.Infrastructure.Commands.Base;
 using PR22.Models;
 using PR22.Models.Decanat;
 using PR22.Services.Interfaces;
@@ -224,6 +225,25 @@ namespace PR22.ViewModels
         #endregion
 
 
+        #region DataValue : string - Результат длительной асинхронной операции
+        /// <summary>
+        /// Результат длительной асинхронной операции
+        /// </summary>
+        private string _DataValue;
+
+        public string DataValue
+        {
+            get => _DataValue;
+            private set => Set(ref _DataValue, value);
+        }
+
+
+        #endregion
+
+
+
+
+
 
         /* ------------------------------------------------------------------------------------*/
 
@@ -295,8 +315,43 @@ namespace PR22.ViewModels
         }
         #endregion
 
+
+        #region StartProcessCommandGroup Запуск процесса
+        public ICommand StartProcessCommand { get; }
+        private static bool CanStartProcessCommandExecuted(object p) => true;
+        /// <summary>
+        /// Запуск процесса
+        /// </summary>
+        /// <param name="p"></param>
+
+        private void OnStartProcessCommandExecuted(object p)
+        {
+            DataValue = asyncData.GetResult(DateTime.Now);
+        }
         #endregion
-  
+
+        #region StopProcessCommandGroup остановка процесса
+        public ICommand StopProcessCommand { get; }
+        private bool CanStopProcessCommandExecuted(object p) => true;
+        /// <summary>
+        /// остановка процесса
+        /// </summary>
+        /// <param name="p"></param>
+
+        private void OnStopProcessCommandExecuted(object p)
+        {
+
+        }
+        #endregion
+
+
+
+
+
+
+
+        #endregion
+
         /* ------------------------------------------------------------------------------------*/
         public MainWindowViewModel(CountriesStatisticViewModel Statistic,IAsyncDataService asyncData)
         {
@@ -310,6 +365,8 @@ namespace PR22.ViewModels
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute,CanChangeTabIndexCommandExecute);
             CreateNewGroupCommand = new LambdaCommand(OnCreateNewGroupCommandExexuted, CanCreateNewGroupCommandExexuted);
             DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecuted);
+            StartProcessCommand = new LambdaCommand(OnStartProcessCommandExecuted, CanStartProcessCommandExecuted);
+            StopProcessCommand = new LambdaCommand(OnStopProcessCommandExecuted, CanStopProcessCommandExecuted);
             #endregion
 
             #region - создание точек

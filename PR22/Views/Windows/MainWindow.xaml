@@ -77,23 +77,42 @@
                     <Grid.Resources>
                         <convertors:ParametricMultiplyValueConvertor x:Key="Mult" Value="{Binding Coefficient}"/>
                     </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="167*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="602*"/>
+                    </Grid.ColumnDefinitions>
                     <components:GaugeIndicator VerticalAlignment="Top" HorizontalAlignment="Left"
                                                Width="80" Height="80"  >
                         <components:GaugeIndicator.Value>
                             <Binding Path="FuelCount" Converter="{StaticResource Mult}">
- 
+
                             </Binding>
                         </components:GaugeIndicator.Value>
                     </components:GaugeIndicator>
-                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="90,0,0,0" Height="30"
-                            Minimum="0" Maximum="100" Value="{Binding FuelCount}" ToolTip="{Binding FuelCount}"/>
-                    <Slider VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="90,40,0,0" Height="30"
+                    <Slider VerticalAlignment="Top" Margin="90,0,0,0" Height="30"
+                            Minimum="0" Maximum="100" Value="{Binding FuelCount}" ToolTip="{Binding FuelCount}" Grid.ColumnSpan="4"/>
+                    <Slider VerticalAlignment="Top" Margin="90,40,0,0" Height="30"
                             Minimum="0.1" Maximum="10.0"  SmallChange="0.1"
                             Value="{Binding Coefficient}"
-                            ToolTip="{Binding Coefficient}"/>
+                            ToolTip="{Binding Coefficient}" Grid.ColumnSpan="4"/>
 
                 </Grid>
- 
+
+            </TabItem>
+            <TabItem Header=" Асинхронная отладка">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Top" Margin="5,5,5,0">
+                        <UniformGrid DockPanel.Dock="Left" HorizontalAlignment="Left" Rows="1">
+                            <Button Margin="5" Padding="20,5" Content="Запуск" Command="{Binding StartProcessCommand}">  </Button>
+                            <Button Margin="5" Padding="20,5" Content="Остановка"></Button>
+                        </UniformGrid>
+                        <ProgressBar DockPanel.Dock="Top"  Margin="10"></ProgressBar>
+                    </DockPanel>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Text="{Binding DataValue}" FontSize="30"></TextBlock>
+                </DockPanel>
             </TabItem>
 
             <TabItem Header="График"  Visibility="Collapsed" >

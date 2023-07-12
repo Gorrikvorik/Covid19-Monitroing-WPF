@@ -8,5 +8,7 @@ namespace PR22.Services.Interfaces
 {
     internal interface IAsyncDataService
     {
+        string GetResult(DateTime Time);
+
     }
 }
