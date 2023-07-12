@@ -201,6 +201,26 @@ namespace PR22.ViewModels
 
 
 
+        #region Coefficient
+
+        /// <summary>
+        /// Коэффициент
+        /// </summary>
+        /// 
+
+        private double _Coefficient = 1;
+        /// <summary>
+        /// Коэффициент
+        /// </summary>
+        /// 
+        public double Coefficient
+        {
+            get { return _Coefficient; }
+            set { Set(ref _Coefficient, value); }
+        }
+        #endregion
+
+
 
         /* ------------------------------------------------------------------------------------*/
 
