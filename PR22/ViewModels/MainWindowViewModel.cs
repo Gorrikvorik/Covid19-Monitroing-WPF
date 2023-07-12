@@ -4,6 +4,7 @@ using OxyPlot.Series;
 using PR22.Infrastructure.Commands;
 using PR22.Models;
 using PR22.Models.Decanat;
+using PR22.Services.Interfaces;
 using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -95,6 +96,8 @@ namespace PR22.ViewModels
         #region SelectedGroupStudends
 
         private readonly CollectionViewSource _SelectedGroupStudends = new CollectionViewSource();
+        private readonly IAsyncDataService asyncData;
+
         private void OnStudentFiltred(object sender, FilterEventArgs e)
         {
             if (e.Item is not Student student)
@@ -295,9 +298,10 @@ namespace PR22.ViewModels
         #endregion
   
         /* ------------------------------------------------------------------------------------*/
-        public MainWindowViewModel(CountriesStatisticViewModel Statistic)
+        public MainWindowViewModel(CountriesStatisticViewModel Statistic,IAsyncDataService asyncData)
         {
             CountriesStatistic = Statistic;
+            this.asyncData = asyncData;
             Statistic.MainModel = this;
             //CountriesStatistic = App.Host.Services.GetRequiredService<CountriesStatisticViewModel>();
             //CountriesStatistic = new CountriesStatisticViewModel(this);

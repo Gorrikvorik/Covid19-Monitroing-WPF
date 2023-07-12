@@ -43,17 +43,10 @@ namespace PR22
             _Host = null;
         }
 
-        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
-        {
-            services.AddTransient<IDataService,DataService>(); // временный объект, при запросе создается новый
-            services.AddSingleton<MainWindowViewModel>();// объект живет все время приложения
-
-
-            services.AddSingleton<CountriesStatisticViewModel>();
-
-            
-        }
-
+        public static void ConfigureServices(HostBuilderContext host, IServiceCollection services) =>
+            services.RegisterServices()
+                    .RegisterViewModels();
+ 
 
         public static string? CurrentDirectory => 
             IsDesignModel ? Path.GetDirectoryName(GetSourceCodePath())
