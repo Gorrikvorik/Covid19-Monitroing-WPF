@@ -1,4 +1,5 @@
-﻿using OxyPlot;
+﻿using Microsoft.Extensions.DependencyInjection;
+using OxyPlot;
 using OxyPlot.Series;
 using PR22.Infrastructure.Commands;
 using PR22.Models;
@@ -256,13 +257,14 @@ namespace PR22.ViewModels
         #endregion
   
         /* ------------------------------------------------------------------------------------*/
-        public MainWindowViewModel()
+        public MainWindowViewModel(CountriesStatisticViewModel Statistic)
         {
-
-
-             CountriesStatistic = new CountriesStatisticViewModel(this);
+            CountriesStatistic = Statistic;
+            Statistic.MainModel = this;
+            //CountriesStatistic = App.Host.Services.GetRequiredService<CountriesStatisticViewModel>();
+            //CountriesStatistic = new CountriesStatisticViewModel(this);
             #region  Объекты Команд
-           CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            CloseApplicationCommand = new LambdaCommand(onCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
             ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecute,CanChangeTabIndexCommandExecute);
             CreateNewGroupCommand = new LambdaCommand(OnCreateNewGroupCommandExexuted, CanCreateNewGroupCommandExexuted);
             DeleteGroupCommand = new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecuted);

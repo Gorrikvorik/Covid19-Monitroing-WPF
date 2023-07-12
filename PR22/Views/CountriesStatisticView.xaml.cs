@@ -30,15 +30,6 @@ namespace PR22.Views
      
     }
 
-        private void Lb1_Selected(object sender, RoutedEventArgs e)
-        {
 
-       
-          
-
-
-
-
-        }
     }
 }
