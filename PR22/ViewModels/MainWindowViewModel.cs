@@ -179,10 +179,28 @@ namespace PR22.ViewModels
         #endregion
 
 
-     
+        #region _FuelCount
 
-     
-         
+      /// <summary>
+      /// Количество топлива
+      /// </summary>
+      /// 
+
+        private double _FuelCount;
+      /// <summary>
+      /// Количество топлива
+      /// </summary>
+      /// 
+        public double FuelCount
+        {
+            get { return _FuelCount; }
+            set { Set(ref _FuelCount, value); }
+        }
+        #endregion
+
+
+
+
 
         /* ------------------------------------------------------------------------------------*/
 

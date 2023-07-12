@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PR22.Components.Gaugeindicator"
+﻿<UserControl x:Class="PR22.Components.GaugeIndicator"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -32,6 +32,8 @@
                     <Line.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="-50"/>
+                            <RotateTransform Angle="{Binding Value, RelativeSource={RelativeSource AncestorType=local:GaugeIndicator}}" x:Name="ArrowRotator"
+                                             />
                         </TransformGroup>
                     </Line.RenderTransform>
                 </Line>

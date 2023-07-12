@@ -89,8 +89,8 @@ namespace PR22.ViewModels
         public CountriesStatisticViewModel(IDataService DataSerive)
         {
             _DataSerive = DataSerive;
-            var data = App.Host.Services.GetRequiredService<IDataService>();
-            var are_ref_equal = ReferenceEquals(DataSerive, data);
+            //var data = App.Host.Services.GetRequiredService<IDataService>();
+            //var are_ref_equal = ReferenceEquals(DataSerive, data);
             //using (var scope = App.Host.Services.CreateScope())
             //{
             //    var data = scope.ServiceProvider.GetService<IDataService>();
