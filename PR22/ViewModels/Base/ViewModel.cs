@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Markup;
+using System.Windows.Threading;
 using System.Xaml;
 
 namespace PR22.ViewModels.Base
@@ -15,7 +16,20 @@ namespace PR22.ViewModels.Base
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? PropertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            var handlers = PropertyChanged;
+            if (handlers is null) return;
+            var invokation_list =  handlers.GetInvocationList();
+            var arg = new PropertyChangedEventArgs(PropertyName);
+            foreach(var action in invokation_list)
+            {
+                if (action.Target is DispatcherObject disp_obj)
+                {
+                    disp_obj.Dispatcher.Invoke(action,this,arg);
+                }
+                else
+                    action.DynamicInvoke(this, arg);
+            }
         }
 
         protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string? PropertyName = null)
