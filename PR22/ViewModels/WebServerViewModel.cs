@@ -13,8 +13,13 @@ namespace PR22.ViewModels
     internal class WebServerViewModel : ViewModel
     {
         #region Enabled
-        private bool _Enabled;
-        public bool Enabled { get => _Enabled; set => Set(ref _Enabled, value); }
+      
+        public bool Enabled { get => Server.Enabled; set
+            {
+                Server.Enabled = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
 
@@ -26,11 +31,12 @@ namespace PR22.ViewModels
         public ICommand StartCommand => _StartCommand
             ?? new LambdaCommand(OnStartCommandExecuted,CanStartCommandExecute);
 
-        private bool CanStartCommandExecute(object p) => !_Enabled;
+        private bool CanStartCommandExecute(object p) => !Enabled;
 
         private void OnStartCommandExecuted(object p)
         {
-            Enabled = true;
+            Server.Start();
+            OnPropertyChanged(nameof(Enabled));
         }
         #endregion
 
@@ -45,11 +51,12 @@ namespace PR22.ViewModels
 
 
 
-        private bool CanStopCommandExecute(object p) => _Enabled;
+        private bool CanStopCommandExecute(object p) => Enabled;
 
         private void OnStopCommandExecuted(object p)
         {
-            Enabled = false;
+            Server.Stop();
+            OnPropertyChanged(nameof(Enabled));
         }
         #endregion
 
