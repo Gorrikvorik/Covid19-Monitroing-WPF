@@ -9,32 +9,23 @@ namespace PR22Consol
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Thread.CurrentThread.Name = "Main thread";
-            var thread = new Thread(ThreadMethod!);
-            thread.Name = "Other thread";
+            var count = 5;
+            var msg = "Hello World";
+            var timeout = 150;
 
-            thread.Start(321);
-            CheckThread();
-            Console.ReadLine();
+            new Thread(() => PrintMethod(msg, count, timeout)).Start();
         }
 
-        private static void ThreadMethod(object parametr) 
+        private static void PrintMethod(string message,int count,int timeout)
         {
-            var value = (int)parametr;
-            Console.WriteLine(value);
-            CheckThread();
-            while(true)
+            for(int i =0; i< count; i++)
             {
-                Thread.Sleep(1000);
-                Console.Title = DateTime.Now.ToString();
+                Console.WriteLine(message);
+                Thread.Sleep(timeout);
             }
         }
 
-        private static void CheckThread()
-        {
-            var thread = Thread.CurrentThread;
-            Console.WriteLine("id:{0}:name:{1}",thread.ManagedThreadId,thread.Name);
-        }
+
     }
 
 }
