@@ -24,6 +24,7 @@ namespace PR22Consol
                     {
                         lock(lock_obj)
                         values.Add(Thread.CurrentThread.ManagedThreadId);
+                        Thread.Sleep(1);
                     }
                 });
             }
