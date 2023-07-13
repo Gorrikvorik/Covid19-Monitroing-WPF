@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace PR22Consol
 {
@@ -9,21 +11,35 @@ namespace PR22Consol
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            var count = 5;
-            var msg = "Hello World";
-            var timeout = 150;
+            var values = new List<int>();
 
-            new Thread(() => PrintMethod(msg, count, timeout)).Start();
-        }
-
-        private static void PrintMethod(string message,int count,int timeout)
-        {
-            for(int i =0; i< count; i++)
+            var threads = new Thread[10];
+            object lock_obj = new object();
+             
+            for (int i =0; i< threads.Length; i++)
             {
-                Console.WriteLine(message);
-                Thread.Sleep(timeout);
+                threads[i] = new Thread(() =>
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        lock(lock_obj)
+                        values.Add(Thread.CurrentThread.ManagedThreadId);
+                    }
+                });
             }
+
+            Monitor.Enter(lock_obj);
+
+          foreach (var thread in threads)
+            {
+                thread.Start();
+            }
+            Console.ReadLine();
+            Console.WriteLine( String.Join(",",values));
+            Console.ReadLine();
         }
+
+
 
 
     }
