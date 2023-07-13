@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PR22.Services
@@ -25,6 +26,7 @@ namespace PR22.Services
 
         private static void OnRequestReceived(object? sender, RequestReceiverEventArgs e)
         {
+            Thread.Sleep(3000);
             using var writer = new StreamWriter(e.Context.Response.OutputStream);
             writer.WriteLine($"PR=22 Application  {DateTime.Now}");
         }
