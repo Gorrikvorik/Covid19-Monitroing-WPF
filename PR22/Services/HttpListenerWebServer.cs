@@ -26,7 +26,7 @@ namespace PR22.Services
         private static void OnRequestReceived(object? sender, RequestReceiverEventArgs e)
         {
             using var writer = new StreamWriter(e.Context.Response.OutputStream);
-            writer.WriteLine("PR=22 Application");
+            writer.WriteLine($"PR=22 Application  {DateTime.Now}");
         }
     }
 }

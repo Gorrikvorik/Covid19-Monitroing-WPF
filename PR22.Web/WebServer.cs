@@ -54,10 +54,14 @@ namespace PR22.Web
         {
             var listener = _Listener;
             listener.Start();
+            HttpListenerContext context = null;
             while (_Enabled)
             {
-                var context = await listener.GetContextAsync().ConfigureAwait(false);
-                ProcessRequest(context);
+                var get_context_task = listener.GetContextAsync();
+                if(context !=null)
+                    ProcessRequestAsync(context);
+                context  = await get_context_task.ConfigureAwait(false);
+
             }
 
 
@@ -65,9 +69,9 @@ namespace PR22.Web
 
         }
 
-        private void ProcessRequest(HttpListenerContext context)
+        private async void ProcessRequestAsync(HttpListenerContext context)
         {
-            RequestReceivied?.Invoke(this, new RequestReceiverEventArgs(context));
+            await Task.Run(() => RequestReceivied?.Invoke(this, new RequestReceiverEventArgs(context)));
         }
     }
     public class RequestReceiverEventArgs : EventArgs 
