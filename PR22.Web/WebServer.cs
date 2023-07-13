@@ -4,9 +4,9 @@ using System.Net.Sockets;
 namespace PR22.Web
 {
   
-    internal class WebServer
+    public class WebServer
     {
-        private event EventHandler<ReqesttReceiverEneverArgs> RequestReceivied;
+        public event EventHandler<RequestReceiverEventArgs> RequestReceivied;
 
         //  private readonly TcpListener _Listener = new TcpListener(new IPEndPoint(IPAddress.Any, 8080)); работает с драйвером сетеовй карты
         private HttpListener _Listener; // работает с операционной системой ( меньше возможностей, но проще реализовать)
@@ -29,8 +29,8 @@ namespace PR22.Web
             {
                 if (_Enabled) return;
                 _Listener = new HttpListener();
-                _Listener.Prefixes.Add($"http://*:{ _Port}");
-                _Listener.Prefixes.Add($"http://+:{ _Port}");
+                _Listener.Prefixes.Add($"http://*:{ _Port}/"); //netsh http add urlacl url=http://*:8080/ user=user_name
+                _Listener.Prefixes.Add($"http://+:{ _Port}/");
                 _Enabled = true;
                 ListenAsync();
 
@@ -67,14 +67,16 @@ namespace PR22.Web
 
         private void ProcessRequest(HttpListenerContext context)
         {
-            RequestReceivied?.Invoke(this, new ReqesttReceiverEneverArgs(context));
+            RequestReceivied?.Invoke(this, new RequestReceiverEventArgs(context));
         }
     }
-    public class ReqesttReceiverEneverArgs : EventArgs 
+    public class RequestReceiverEventArgs : EventArgs 
     {
-        public ReqesttReceiverEneverArgs(HttpListenerContext context)
+        public RequestReceiverEventArgs(HttpListenerContext context)
         {
-
+            Context = context;
         }
+
+        public HttpListenerContext Context { get; }
     }
 }
