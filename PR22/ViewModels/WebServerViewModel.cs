@@ -1,4 +1,5 @@
 ﻿using PR22.Infrastructure.Commands;
+using PR22.Services.Interfaces;
 using PR22.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,8 @@ namespace PR22.ViewModels
         public ICommand StopCommand => _StopCommand
             ?? new LambdaCommand(OnStopCommandExecuted, CanStopCommandExecute);
 
+
+
         private bool CanStopCommandExecute(object p) => _Enabled;
 
         private void OnStopCommandExecuted(object p)
@@ -50,5 +53,10 @@ namespace PR22.ViewModels
         }
         #endregion
 
+        public IWebServerService Server { get; }
+        public WebServerViewModel(IWebServerService Server)
+        {
+            this.Server = Server;
+        }
     }
 }

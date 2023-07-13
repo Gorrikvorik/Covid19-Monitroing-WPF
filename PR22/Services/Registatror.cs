@@ -9,6 +9,7 @@ namespace PR22.Services
         {
             services.AddSingleton<IDataService, DataService>(); // временный объект, при запросе создается новый
             services.AddTransient<IAsyncDataService,AsyncDataService>();
+            services.AddTransient<IWebServerService, HttpListenerWebServer>();
 
             return services;
 
