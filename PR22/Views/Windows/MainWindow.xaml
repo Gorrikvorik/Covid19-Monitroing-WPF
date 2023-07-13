@@ -39,9 +39,19 @@
                     </MenuItem.Command>
                 </MenuItem>-->
             </MenuItem>
+            <MenuItem Header="Сервис">
+                <MenuItem Header="Веб-сервер" DataContext="{Binding WebServer}">
+                    <MenuItem Header="Включен" IsCheckable="True" IsChecked="{Binding Enabled}"/>
+                    <Separator/>
+                        <MenuItem Header="Включить" Command="{Binding StartCommand}"></MenuItem>
+                        <MenuItem Header="Выключить" Command="{Binding StopCommand}"></MenuItem>
+
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О Программе"></MenuItem>
             </MenuItem>
+
             <!--<MenuItem  Command="{Binding ChangeTabIndexCommand}" CommandParameter="-1">
                 <MenuItem.Header>
                     <fa:ImageAwesome Height="12" Icon="Regular_ArrowAltCircleLeft"></fa:ImageAwesome>

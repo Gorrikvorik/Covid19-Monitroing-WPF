@@ -10,6 +10,7 @@ namespace PR22.ViewModels
         {
             services.AddSingleton<MainWindowViewModel>();// объект живет все время приложения
             services.AddSingleton<CountriesStatisticViewModel>();
+            services.AddSingleton<WebServerViewModel>();
             return services;
         }
     }
