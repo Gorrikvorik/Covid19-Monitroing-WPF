@@ -29,7 +29,7 @@ namespace PR22Consol
                 });
             }
 
-            Monitor.Enter(lock_obj);
+ 
 
           foreach (var thread in threads)
             {
