@@ -3,8 +3,11 @@ using System.Net.Sockets;
 
 namespace PR22.Web
 {
+  
     internal class WebServer
     {
+        private event EventHandler<ReqesttReceiverEneverArgs> RequestReceivied;
+
         //  private readonly TcpListener _Listener = new TcpListener(new IPEndPoint(IPAddress.Any, 8080)); работает с драйвером сетеовй карты
         private HttpListener _Listener; // работает с операционной системой ( меньше возможностей, но проще реализовать)
         private readonly int _Port;
@@ -29,10 +32,10 @@ namespace PR22.Web
                 _Listener.Prefixes.Add($"http://*:{ _Port}");
                 _Listener.Prefixes.Add($"http://+:{ _Port}");
                 _Enabled = true;
-          
+                ListenAsync();
 
             }
-            Listen();
+
         }
 
         public void Stop() 
@@ -47,7 +50,29 @@ namespace PR22.Web
 
         }
 
-        private void Listen()
+        private async void ListenAsync()
+        {
+            var listener = _Listener;
+            listener.Start();
+            while (_Enabled)
+            {
+                var context = await listener.GetContextAsync().ConfigureAwait(false);
+                ProcessRequest(context);
+            }
+
+
+            listener.Stop();
+
+        }
+
+        private void ProcessRequest(HttpListenerContext context)
+        {
+            RequestReceivied?.Invoke(this, new ReqesttReceiverEneverArgs(context));
+        }
+    }
+    public class ReqesttReceiverEneverArgs : EventArgs 
+    {
+        public ReqesttReceiverEneverArgs(HttpListenerContext context)
         {
 
         }
