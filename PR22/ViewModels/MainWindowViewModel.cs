@@ -30,6 +30,7 @@ namespace PR22.ViewModels
         /* ------------------------------------------------------------------------------------*/
 
         public   CountriesStatisticViewModel  CountriesStatistic { get; }
+        public WebServerViewModel WebServer { get; }
 
         #region Старые коллекции
         public ObservableCollection<Group> Groups { get; }
@@ -359,10 +360,11 @@ namespace PR22.ViewModels
         #endregion
 
         /* ------------------------------------------------------------------------------------*/
-        public MainWindowViewModel(CountriesStatisticViewModel Statistic,IAsyncDataService asyncData)
+        public MainWindowViewModel(CountriesStatisticViewModel Statistic,IAsyncDataService asyncData, WebServerViewModel WebServer)
         {
             CountriesStatistic = Statistic;
             this.asyncData = asyncData;
+            this.WebServer = WebServer;
             Statistic.MainModel = this;
             //CountriesStatistic = App.Host.Services.GetRequiredService<CountriesStatisticViewModel>();
             //CountriesStatistic = new CountriesStatisticViewModel(this);
