@@ -8,7 +8,6 @@ namespace PR22.Services.Interfaces
 {
     internal interface IWebServerService
     {
-
         bool Enabled { get; set; }
         void Start();
 

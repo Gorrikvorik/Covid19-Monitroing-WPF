@@ -20,8 +20,8 @@ namespace PR22Consol
             var context = e.Context;
             Console.WriteLine($"Connection {context.Request.UserHostAddress}");
 
-            using var writer = new StreamWriter(context.Response.OutputStream);
-            writer.WriteLine("Hello from Test Web Server!!!");
+        using var writer = new StreamWriter(context.Response.OutputStream);
+        writer.WriteLine("Hello from Test Web Server!!!");
         }
     }
 }
