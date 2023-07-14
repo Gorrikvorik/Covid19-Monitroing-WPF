@@ -12,6 +12,7 @@
                 
                 <ResourceDictionary Source="Resources\Styles\Buttons.xaml"/>
                 <ResourceDictionary Source="Resources\Styles\GridSpliiters.xaml"/>
+                <ResourceDictionary Source="Resources\Styles\PR22WindowsStyle.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
 
