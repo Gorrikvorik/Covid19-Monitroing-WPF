@@ -7,6 +7,10 @@
         Title="TestWindow" Height="450" Width="800"
         Style="{StaticResource PR22WindowStyle}">
     <Grid>
-        
+        <Button VerticalAlignment="Top" Content="Hello" HorizontalAlignment="Left" Margin="30,40"/>
+        <Canvas>
+            <Ellipse Canvas.Left="20" Canvas.Bottom="20" Stroke="Blue" StrokeThickness="2"
+                                                          Fill="Red"/>
+        </Canvas>
     </Grid>
 </Window>
