@@ -11,6 +11,39 @@ namespace PR22Test.Behaviors
     {
         private Point _StartPoint;
         private Canvas _Canvas;
+
+
+        #region PositionX : Double -  Горизонтальное смещение
+
+        public static readonly DependencyProperty PositionXProperty =
+    DependencyProperty.Register(
+        nameof(PositionX),
+        typeof(double),
+        typeof(DragInCanvas),
+        new PropertyMetadata(default(double)));
+        public double PositionX 
+        { 
+            get => (double)GetValue(PositionXProperty); 
+            set => SetValue(PositionXProperty, value);
+        }
+
+        #endregion
+
+        #region PositionX : Double -  Вертикальное смещение
+
+        public static readonly DependencyProperty PositionYProperty =
+    DependencyProperty.Register(
+        nameof(PositionY),
+        typeof(double),
+        typeof(DragInCanvas),
+        new PropertyMetadata(default(double)));
+        public double PositionY
+        {
+            get => (double)GetValue(PositionYProperty);
+            set => SetValue(PositionYProperty, value);
+        }
+        #endregion
+
         protected override void OnAttached()
         {
             AssociatedObject.MouseLeftButtonDown += OnButtonDown;
@@ -25,6 +58,12 @@ namespace PR22Test.Behaviors
         }
         private void OnButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //if(_Canvas is null)
+            //{
+            //    _Canvas = VisualTreeHelper.GetParent(AssociatedObject) as Canvas;
+            //    if (_Canvas is null) return;
+            //}
+
             if ((_Canvas ??= VisualTreeHelper.GetParent(AssociatedObject) as Canvas) is null)
                 return;
 
@@ -48,6 +87,10 @@ namespace PR22Test.Behaviors
             var delta = current_pos - _StartPoint;
             obj.SetValue(Canvas.LeftProperty, delta.X);
             obj.SetValue(Canvas.TopProperty, delta.Y);
+
+
+            PositionX = delta.X;
+            PositionY = delta.Y;
 
         }
     }
