@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PR22Test"
+        xmlns:i ="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:b="clr-namespace:PR22Test.Behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -13,5 +15,13 @@
         <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="Start" Padding="30,20"
                 Click="Button_Click"/>
         <TextBlock Name="ResultBlock" VerticalAlignment="Top" HorizontalAlignment="Center" Text="None"></TextBlock>
+
+        <Canvas>
+            <Ellipse Canvas.Left="30" Canvas.Top="20" Stroke="Red" StrokeThickness="2" Fill="DarkBlue" Width="20" Height="20">
+                <i:Interaction.Behaviors>
+                    <b:DragInCanvas/>
+                </i:Interaction.Behaviors>
+            </Ellipse>
+        </Canvas>
     </Grid>
 </Window>
