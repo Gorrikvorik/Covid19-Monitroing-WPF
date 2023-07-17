@@ -24,10 +24,16 @@ namespace PR22.Infrastructure.Behaviors
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount > 1) return;
-            if (!(AssociatedObject.FindVisualRoot() is Window window)) return;
-
-            window?.DragMove();
+            switch (e.ClickCount)
+            {
+                case 1:
+                    Dragmove();
+                    break;
+                default:
+                    Maximize();
+                    break;  
+            }
+         
         }
 
         protected override void OnDetaching()
@@ -36,5 +42,23 @@ namespace PR22.Infrastructure.Behaviors
             _Window = null;
         }
 
+        private  void Dragmove()
+        {
+            if (!(AssociatedObject.FindVisualRoot() is Window window)) return;
+
+            window?.DragMove();
+        }
+
+        private void Maximize()
+        {
+            if (!(AssociatedObject.FindVisualRoot() is Window window)) return;
+            window.WindowState = window.WindowState switch
+            {
+                WindowState.Normal => WindowState.Maximized,
+                WindowState.Maximized => WindowState.Normal,
+                _ => window.WindowState
+            };
+        }
+        
     }
 }
