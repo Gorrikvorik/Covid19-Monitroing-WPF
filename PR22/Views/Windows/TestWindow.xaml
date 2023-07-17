@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PR22"
         Title="TestWindow" Height="450" Width="800"
+        Icon="../../Resources/WindowIcon.png"
         Style="{StaticResource PR22WindowStyle}">
     <Grid>
         <Button VerticalAlignment="Top" Content="Hello" HorizontalAlignment="Left" Margin="30,40"/>
         <Canvas>
-            <Ellipse Canvas.Left="20" Canvas.Bottom="20" Stroke="Blue" StrokeThickness="2"
-                                                          Fill="Red"/>
+            <Ellipse Canvas.Left="20" Canvas.Bottom="20" Stroke="Blue" StrokeThickness="10"
+                                                          Fill="Red" />
+            
         </Canvas>
     </Grid>
 </Window>

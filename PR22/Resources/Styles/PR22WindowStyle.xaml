@@ -14,9 +14,29 @@
                   Background="{TemplateBinding Background}"
                   TextOptions.TextRenderingMode="ClearType"
                   TextOptions.TextFormattingMode="Display">
-                <AdornerDecorator>
-                    <ContentPresenter/>
-                </AdornerDecorator>
+                <DockPanel>
+                    <Grid  x:Name="PART_TitleBar"  DockPanel.Dock="Top" Background="WhiteSmoke">
+                        <DockPanel Height="32">
+                            <Image  x:Name="PART_Icon" DockPanel.Dock="Left"
+                                    Source="{TemplateBinding Icon}"></Image>
+                            
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <Button>Min</Button>
+                                <Button>Max</Button>
+                                <Button>Close</Button>
+                            </StackPanel>
+                            
+                            <TextBlock x:Name="PART_Title" Text="{TemplateBinding Title}"
+                                       FontSize="12"
+                                       FontFamily="Segou UI"
+                                       Margin="4,0,0,0"
+                                       VerticalAlignment="Center"/>
+                        </DockPanel>
+                    </Grid>
+                    <AdornerDecorator>
+                        <ContentPresenter/>
+                    </AdornerDecorator>
+                </DockPanel>     
             </Grid>
         </Grid>
     </ControlTemplate>

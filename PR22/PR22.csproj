@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\WindowIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
