@@ -30,5 +30,28 @@ namespace  System.Windows
             }
             while (true);
         }
+
+        public static T FindVisualParent<T>(this DependencyObject obj) where T :DependencyObject
+        {
+            if (obj is null) return null;
+            var target = obj;
+            do
+            {
+                target = VisualTreeHelper.GetParent(obj);
+            }
+            while (target != null && !(target is T));
+            return target as T;
+        }
+        public static T FindLogicalParent<T>(this DependencyObject obj) where T : DependencyObject
+        {
+            if (obj is null) return null;
+            var target = obj;
+            do
+            {
+                target = LogicalTreeHelper.GetParent(obj);
+            }
+            while (target != null && !(target is T));
+            return target as T;
+        }
     }
 }
