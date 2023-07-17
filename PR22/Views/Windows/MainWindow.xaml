@@ -12,6 +12,8 @@
         xmlns:i ="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:l="clr-namespace:PR22" xmlns:componentMidel="clr-namespace:System.ComponentModel;assembly=WindowsBase" xmlns:components="clr-namespace:PR22.Components" xmlns:convertors="clr-namespace:PR22.Infrastructure.Convertors"
+        Style="{StaticResource PR22WindowStyle}"
+         Icon="../../Resources/WindowCovidIconFreeBackGround.png"
         Title="{Binding Path=Title}"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         Height="450" Width="800">

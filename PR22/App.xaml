@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PR22"
              xmlns:vm="clr-namespace:PR22.ViewModels"
-             StartupUri="Views/Windows/TestWindow.xaml">
+             StartupUri="Views/Windows/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

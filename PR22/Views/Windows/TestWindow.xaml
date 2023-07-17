@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PR22"
         Title="TestWindow" Height="450" Width="800"
-        Icon="../../Resources/WindowIcon.png"
+        Icon="../../Resources/WindowIcon.ico"
         Style="{StaticResource PR22WindowStyle}">
     <Grid>
         <Button VerticalAlignment="Top" Content="Hello" HorizontalAlignment="Left" Margin="30,40"/>
