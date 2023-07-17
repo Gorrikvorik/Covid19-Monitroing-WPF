@@ -1,5 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                    xmlns:b="clr-namespace:PR22.Infrastructure.Behaviors">
+
 
     <Style x:Key="PR22WindowHeaderButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Focusable" Value="False"/>
@@ -69,7 +72,10 @@
                                 <Button>
                                     <Path Data="{StaticResource MaximizeToMaxButtonIconGeometry}"/>
                                 </Button>
-                                <Button Foreground="Red">
+                                <Button Foreground="Red" >
+                                    <i:Interaction.Behaviors>
+                                        <b:CloseWindow/>
+                                    </i:Interaction.Behaviors>
                                     <Path Data="{StaticResource MaximizeToMinButtonIconGeometry}"/>
                                 </Button>
                             </StackPanel>

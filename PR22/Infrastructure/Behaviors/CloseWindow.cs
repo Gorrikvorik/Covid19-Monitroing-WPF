@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace PR22Test.Behaviors
+namespace PR22.Infrastructure.Behaviors
 {
     internal class CloseWindow : Behavior<Button>
     {
