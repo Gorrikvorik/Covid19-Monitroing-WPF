@@ -68,8 +68,14 @@
                                 </StackPanel.Resources>
                                 <Button>
                                     <Path Data="{StaticResource MinimizeButtonIconGeometry}"/>
+                                    <i:Interaction.Behaviors>
+                                        <b:MinimizeWindowChange/>
+                                    </i:Interaction.Behaviors>
                                 </Button>
                                 <Button>
+                                    <i:Interaction.Behaviors>
+                                        <b:MinimizeWindow/>
+                                    </i:Interaction.Behaviors>
                                     <Path Data="{StaticResource MaximizeToMaxButtonIconGeometry}"/>
                                 </Button>
                                 <Button Foreground="Red" >
