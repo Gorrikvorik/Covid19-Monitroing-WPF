@@ -37,7 +37,7 @@ namespace  System.Windows
             var target = obj;
             do
             {
-                target = VisualTreeHelper.GetParent(obj);
+                target = VisualTreeHelper.GetParent(target);
             }
             while (target != null && !(target is T));
             return target as T;
@@ -48,7 +48,7 @@ namespace  System.Windows
             var target = obj;
             do
             {
-                target = LogicalTreeHelper.GetParent(obj);
+                target = LogicalTreeHelper.GetParent(target);
             }
             while (target != null && !(target is T));
             return target as T;
