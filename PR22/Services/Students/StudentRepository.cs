@@ -11,6 +11,10 @@ namespace PR22.Services.Students
 
     internal class StudentRepository : RepositoryInMemory<Student>
     {
+        public StudentRepository() : base(TestData.Students)
+        {
+
+        }
         protected override void Update(Student source, Student Destination)
         {
             Destination.Name = source.Name;

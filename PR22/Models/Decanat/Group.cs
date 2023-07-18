@@ -7,7 +7,7 @@ namespace PR22.Models.Decanat
     {
         public string? Name { get; set; }
 
-        public IList<Student>? Students { get; set; }
+        public IList<Student>? Students { get; set; } = new List<Student>();
 
         public string? Description { get; set; }
         public int Id { get; set; }
