@@ -22,8 +22,8 @@ namespace PR22.Infrastructure.Commands
             var window = new StudentsManagmentWindow {
              Owner = Application.Current.MainWindow
             };
-            var owner = Application.Current.MainWindow;
-            owner.Hide();
+            //var owner = Application.Current.MainWindow;
+            //owner.Hide();
             _Window = window;
             window.Closed += OnWindowClosed;
             window.ShowDialog();
@@ -33,8 +33,8 @@ namespace PR22.Infrastructure.Commands
         {
             ((Window)Sender).Closed -= OnWindowClosed!;
             _Window = null!;
-            var owner = Application.Current.MainWindow;
-            owner.Show();
+            //var owner = Application.Current.MainWindow;
+            //owner.Show();
         }
     }
 }
