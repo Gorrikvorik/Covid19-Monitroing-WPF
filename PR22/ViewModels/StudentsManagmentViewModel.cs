@@ -37,13 +37,25 @@ namespace PR22.ViewModels
 
         #region _SelectedGroup : Group - выбранная группа студентов
         /// <summary>
-        /// номер вкладки
+        ///Group - выбранная группа студентов
         /// </summary>
         private Group _SelectedGroup;
         public Group SelectedGroup
         {
             get => _SelectedGroup;
             set => Set(ref _SelectedGroup, value);
+        }
+        #endregion
+
+        #region SelectedStudent : Student - выбранная группа студентов
+        /// <summary>
+        ///Student - выбранный студент
+        /// </summary>
+        private Student _SelectedStudent;
+        public Student SelectedStudent
+        {
+            get => _SelectedStudent;
+            set => Set(ref _SelectedStudent, value);
         }
         #endregion
     }
