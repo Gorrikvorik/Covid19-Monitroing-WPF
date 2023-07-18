@@ -9,12 +9,20 @@
         xmlns:decanat="clr-namespace:PR22.Models.Decanat"
         xmlns:view ="clr-namespace:PR22.Views"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-        
+        xmlns:i ="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:l="clr-namespace:PR22" xmlns:componentMidel="clr-namespace:System.ComponentModel;assembly=WindowsBase" xmlns:components="clr-namespace:PR22.Components" xmlns:convertors="clr-namespace:PR22.Infrastructure.Convertors"
+        Style="{StaticResource PR22WindowStyle}"
+         Icon="../../Resources/WindowCovidIconFreeBackGround.png"
         Title="{Binding Path=Title}"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding CountriesStatistic.RefreshDataCommand}"/>
+            
+        </i:EventTrigger>
+        </i:Interaction.Triggers>
     <Window.InputBindings>
         <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"></KeyBinding>
     </Window.InputBindings>

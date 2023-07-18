@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PR22Test"
+        xmlns:i ="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:b="clr-namespace:PR22Test.Behaviors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="305" Width="620">
     <Window.Resources>
 
     </Window.Resources>
@@ -13,5 +15,22 @@
         <Button VerticalAlignment="Center" HorizontalAlignment="Center" Content="Start" Padding="30,20"
                 Click="Button_Click"/>
         <TextBlock Name="ResultBlock" VerticalAlignment="Top" HorizontalAlignment="Center" Text="None"></TextBlock>
+
+        <Canvas>
+            <Ellipse Canvas.Left="30" Canvas.Top="20" Stroke="Red" StrokeThickness="2" Fill="DarkBlue" Width="20" Height="20">
+                <i:Interaction.Behaviors>
+                    <b:DragInCanvas x:Name="EllipseDragBehavior"/>
+                </i:Interaction.Behaviors>
+            </Ellipse>
+
+            <Button Canvas.Left="331" Canvas.Top="59" Content="Закрыть" >
+                <i:Interaction.Behaviors>
+                    <b:CloseWindow />
+                </i:Interaction.Behaviors>
+            </Button>
+            <TextBlock Canvas.Left="10" Canvas.Top="40" Text="{Binding  PositionX,ElementName=EllipseDragBehavior}"/>
+            <TextBlock Canvas.Left="10" Canvas.Top="60" Text="{Binding  PositionY,ElementName=EllipseDragBehavior}"/>
+
+        </Canvas>
     </Grid>
 </Window>

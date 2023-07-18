@@ -16,6 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\WindowCovidIcon.ico" />
+    <None Remove="Resources\WindowCovidIcon.png" />
+    <None Remove="Resources\WindowCovidIconFreeBackGround.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome5" Version="2.1.11" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
@@ -25,6 +31,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PR22.Web\PR22.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\WindowCovidIcon.ico" />
+    <Resource Include="Resources\WindowCovidIcon.png" />
+    <Resource Include="Resources\WindowCovidIconFreeBackGround.png" />
+    <Resource Include="Resources\WindowIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
