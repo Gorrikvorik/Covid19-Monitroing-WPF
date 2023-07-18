@@ -35,7 +35,6 @@ namespace PR22.ViewModels
         }
         #endregion
 
-
         #region _SelectedGroup : Group - выбранная группа студентов
         /// <summary>
         /// номер вкладки
