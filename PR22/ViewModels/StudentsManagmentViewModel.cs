@@ -1,4 +1,5 @@
-﻿using PR22.Models.Decanat;
+﻿using PR22.Infrastructure.Commands;
+using PR22.Models.Decanat;
 using PR22.Services.Students;
 using PR22.ViewModels.Base;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PR22.ViewModels
 {
@@ -57,6 +59,44 @@ namespace PR22.ViewModels
             get => _SelectedStudent;
             set => Set(ref _SelectedStudent, value);
         }
+        #endregion
+
+        #region Команды
+
+
+        #region _EditStudentCommand - Команда изменить студента
+
+        private ICommand _EditStudentCommand;
+
+        public ICommand EditStudentCommand => _EditStudentCommand ??= new LambdaCommand(OnEditStudentCommandExecuted,CanEditStudentCommandExecute);
+
+        private bool CanEditStudentCommandExecute(object p) => p is Student;
+
+        private  void OnEditStudentCommandExecuted(object p)
+        {
+            var student = (Student)p;
+
+        }
+
+        #endregion
+
+
+        #region _AddStudentCommand - Команда добавить студента
+
+        private ICommand _AddStudentCommand;
+
+        public ICommand AddStudentCommand => _AddStudentCommand ??= new LambdaCommand(OnAddStudentCommandCommandExecuted, CanAddStudentCommandCommandExecute);
+
+        private bool CanAddStudentCommandCommandExecute(object p) =>p is Group;
+
+        private void OnAddStudentCommandCommandExecuted(object p)
+        {
+            var group = (Group)p;
+
+        }
+
+        #endregion
+
         #endregion
     }
 }
