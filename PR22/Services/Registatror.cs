@@ -13,6 +13,8 @@ namespace PR22.Services
             services.AddTransient<IWebServerService, HttpListenerWebServer>();
             services.AddSingleton<StudentRepository>();
             services.AddSingleton<GroupRepository>();
+            services.AddSingleton<StudentManager>();
+
 
 
             return services;
