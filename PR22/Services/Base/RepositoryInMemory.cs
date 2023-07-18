@@ -48,6 +48,6 @@ namespace PR22.Services.Base
              Update(item, db_item);
         }
 
-        protected abstract void Update(T source, T Destination)
+        protected abstract void Update(T source, T Destination);
     }
 }

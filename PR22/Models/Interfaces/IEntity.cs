@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PR22.Models.Interfaces
 {
-    internal interface IEntity
+    public interface IEntity
     {
         int Id { get; set; }
     }
