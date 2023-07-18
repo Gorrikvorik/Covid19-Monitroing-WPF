@@ -11,7 +11,8 @@ namespace PR22.Services.Students
     {
         public static IEnumerable<Group> Groups { get; } = Enumerable
         .Range(1, 10)
-            .Select(i => new Group { Name = $"Группа {i}" });
+            .Select(i => new Group { Name = $"Группа {i}" })
+            .ToArray();
 
         public static Student[] Students { get; } = CreateStudents(Groups);
 
@@ -30,7 +31,7 @@ namespace PR22.Services.Students
                         Surname = $"Фамилия {index}",
                         Patronymic = $"Отчество {index++}",
                         Birthday = DateTime.Now.Subtract(TimeSpan.FromDays(300 * rnd.Next(19, 30))),
-                        Rating = rnd.Next() * 100
+                        Rating = rnd.NextDouble() * 100
                     });
                 }
             }
