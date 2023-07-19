@@ -2,11 +2,13 @@
 using PR22.Models.Decanat;
 using PR22.Services.Students;
 using PR22.ViewModels.Base;
+using PR22.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PR22.ViewModels
@@ -76,6 +78,18 @@ namespace PR22.ViewModels
         {
             var student = (Student)p;
 
+            var dlg = new StudentEditorWindow()
+            {
+                FirstName = student.Name,
+                LastName = student.Surname,
+                Patronymic = student.Patronymic,
+                Rating = student.Rating,
+                Birthday = student.Birthday
+            };
+            if (dlg.ShowDialog() == true)
+                MessageBox.Show("Пользователь выполнил редактирование");
+            else
+                MessageBox.Show("Пользователь  отказался от  редактирования");
         }
 
         #endregion
