@@ -17,5 +17,7 @@ namespace PR22.Services.Interfaces
         void ShowError(string Message, string Caption);
 
         bool Confirm(string Message, string Caption,bool Exclamation = false);
+
+        string GetStringValue (string Message,string Caption, string DefaultVale = null);
     }
 }

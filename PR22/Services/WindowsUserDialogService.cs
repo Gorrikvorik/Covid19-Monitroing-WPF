@@ -12,6 +12,8 @@ namespace PR22.Services
 {
     class WindowsUserDialogService : IUserDialogService
     {
+
+        private static Window activeWindow => Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
         public bool Confirm(string Message, string Caption, bool Exclamation = false)
         {
           return  MessageBox.Show(
@@ -31,7 +33,7 @@ namespace PR22.Services
                 Patronymic = student.Patronymic,
                 Rating = student.Rating,
                 Birthday = student.Birthday,
-                Owner = Application.Current.Windows.OfType<StudentsManagmentWindow>().FirstOrDefault(),
+                Owner = activeWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner
             };
             if (!dlg.ShowDialog() == true) return false;
@@ -69,6 +71,19 @@ namespace PR22.Services
         public void ShowWarning(string Message, string Caption)
         {
             MessageBox.Show(Message, Caption, MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        public string GetStringValue(string Message, string Caption, string DefaultValue = null)
+        {
+            var value_dialog = new StringValueDialogWindow()
+            {
+                Message = Message,
+                Title = Caption,
+                Value = DefaultValue ?? string.Empty,
+                Owner = activeWindow
+
+            };
+          return  value_dialog.ShowDialog() == true ? value_dialog.Value : DefaultValue;
         }
     }
 }

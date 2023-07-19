@@ -120,8 +120,27 @@ namespace PR22.ViewModels
                   if (_UserDialog.Confirm("Не удалось создать сутдента. Повторить?", "Менеджер студентов"))
                         OnAddStudentCommandCommandExecuted(p);
      }
-            
 
+
+
+        #endregion
+
+
+        #region _TestCommand - Тестовая команда
+
+        private ICommand _TestCommand;
+
+        public ICommand TestCommand => _TestCommand ??= new LambdaCommand(OnTestCommandExecuted, CanTestCommandExecute);
+
+        private bool CanTestCommandExecute(object p) => true;
+
+        private void OnTestCommandExecuted(object p)
+        {
+            var value = _UserDialog.GetStringValue("Введите строку", "123", "Значение по умолчанию");
+
+            _UserDialog.ShowInformation($"Введено: {value}", "123");
+
+        }
 
         #endregion
 
