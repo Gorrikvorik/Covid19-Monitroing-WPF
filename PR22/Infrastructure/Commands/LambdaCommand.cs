@@ -19,7 +19,10 @@ namespace PR22.Infrastructure.Commands
         }
         public override bool CanExecute(object? parameter) => canExecute?.Invoke(parameter) ?? true;
 
-        public override void Execute(object? parameter) => execute(parameter);
-        
+        public override void Execute(object? parameter)
+        {
+            if (!CanExecute(parameter)) return;
+            execute(parameter);
+        }
     }
 }
