@@ -24,7 +24,7 @@ namespace PR22.Views.Windows
         public static DependencyProperty FirstNameProperty = DependencyProperty.Register(
             nameof(FirstName),
             typeof(string),
-            typeof(StudentsManagmentWindow),
+            typeof(StudentEditorWindow),
             new PropertyMetadata(default(string)));
 
         [Description("Имя")]
@@ -33,7 +33,7 @@ namespace PR22.Views.Windows
         public static DependencyProperty LastNameProperty = DependencyProperty.Register(
             nameof(LastName),
             typeof(string),
-            typeof(StudentsManagmentWindow),
+            typeof(StudentEditorWindow),
             new PropertyMetadata(default(string)));
 
         [Description("Фамилия")]
@@ -44,7 +44,7 @@ namespace PR22.Views.Windows
         public static DependencyProperty PatronymicProperty = DependencyProperty.Register(
             nameof(Patronymic),
             typeof(string),
-            typeof(StudentsManagmentWindow),
+            typeof(StudentEditorWindow),
             new PropertyMetadata(default(string)));
 
 
@@ -56,7 +56,7 @@ namespace PR22.Views.Windows
         public static DependencyProperty RatingProperty = DependencyProperty.Register(
          nameof(Rating),
          typeof(double),
-         typeof(StudentsManagmentWindow),
+         typeof(StudentEditorWindow),
          new PropertyMetadata(default(double)));
 
         [Description("Рейтинг")]
@@ -68,7 +68,7 @@ namespace PR22.Views.Windows
         public static DependencyProperty BirthdayProperty = DependencyProperty.Register(
          nameof(Birthday),
          typeof(DateTime),
-         typeof(StudentsManagmentWindow),
+         typeof(StudentEditorWindow),
          new PropertyMetadata(default(DateTime)));
 
         [Description("Дата рождения")]

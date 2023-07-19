@@ -1,5 +1,6 @@
 ﻿using PR22.Infrastructure.Commands;
 using PR22.Models.Decanat;
+using PR22.Services.Interfaces;
 using PR22.Services.Students;
 using PR22.ViewModels.Base;
 using PR22.Views.Windows;
@@ -17,9 +18,14 @@ namespace PR22.ViewModels
     {
         public IEnumerable<Student> Students => _StudentManager.Students;
         public IEnumerable<Group> Groups => _StudentManager.Groups;
-        public StudentsManagmentViewModel(StudentManager studentManager) => this._StudentManager = studentManager;
+        public StudentsManagmentViewModel(_StudentManager studentManager, IUserDialogService userDialog)
+        {
+            _StudentManager = studentManager;
+            this._UserDialog = userDialog;
+        }
 
-        private readonly StudentManager _StudentManager;
+        private readonly _StudentManager _StudentManager;
+        private readonly IUserDialogService _UserDialog;
         #region Заголовок Окна
         private string _Title = "Управление стуеднтами";
 
@@ -76,20 +82,17 @@ namespace PR22.ViewModels
 
         private  void OnEditStudentCommandExecuted(object p)
         {
-            var student = (Student)p;
-
-            var dlg = new StudentEditorWindow()
+            if (_UserDialog.Edit(p))
             {
-                FirstName = student.Name,
-                LastName = student.Surname,
-                Patronymic = student.Patronymic,
-                Rating = student.Rating,
-                Birthday = student.Birthday
-            };
-            if (dlg.ShowDialog() == true)
-                MessageBox.Show("Пользователь выполнил редактирование");
+                _StudentManager.Update((Student)p);
+
+                _UserDialog.ShowInformation("Студент отредактирован", "Менеджерр студентов");
+
+            }
             else
-                MessageBox.Show("Пользователь  отказался от  редактирования");
+                _UserDialog.ShowWarning("Отказ от редактирования", "Менеджер студентов");
+
+
         }
 
         #endregion
@@ -107,7 +110,18 @@ namespace PR22.ViewModels
         {
             var group = (Group)p;
 
-        }
+            var student = new Student();
+
+            if (!_UserDialog.Edit(student) || _StudentManager.Create(student, group.Name))
+            {
+                OnPropertyChanged(nameof(Students));
+                return;
+            }
+                  if (_UserDialog.Confirm("Не удалось создать сутдента. Повторить?", "Менеджер студентов"))
+                        OnAddStudentCommandCommandExecuted(p);
+     }
+            
+
 
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using PR22.Models.Decanat;
 using PR22.Services.Base;
+using System.Linq;
 
 namespace PR22.Services.Students
 {
@@ -16,5 +17,7 @@ namespace PR22.Services.Students
 
 
         }
+
+        public Group Get(string GroupName) => GetAll().FirstOrDefault(g => g.Name == GroupName);
     }
 }
